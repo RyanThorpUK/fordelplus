@@ -27,10 +27,10 @@ Route::get('marketplace/{article}', Article::class)->name('marketplace.article')
 Route::get('business', Business::class)->name('business');
 Route::get('marketplace-business-archive', MarketplaceBusinessArchive::class)->name('marketplace.business.archive');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     Route::get('all-offers', AllOffers::class)->name('all-offers');
-    Route::get('users', Users::class)->name('users');
+    Route::get('users/{type?}', Users::class)->name('users');
     Route::get('business-info', BusinessInfo::class)->name('business-info');
 
     Route::redirect('settings', 'settings/profile');

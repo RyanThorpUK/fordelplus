@@ -6,32 +6,38 @@
     
                 <ul class="flex items-center gap-6 ml-6 pl-6">
                     <li class="border-l border-black pl-6">
-                        <a href="#" class="text-sm text-gray-500">Employees</a>
+                        <a href="{{ route('users', ['type' => 'employees']) }}" class="text-sm text-gray-500">Employees</a>
                     </li>
                     <li class="border-l border-black pl-6">
-                        <a href="#" class="text-sm text-gray-500">Managers</a>
+                        <a href="{{ route('users', ['type' => 'managers']) }}" class="text-sm text-gray-500">Managers</a>
                     </li>
                 </ul>
             </div>
     
             <div class="">
-                <button class="btn btn--sub-accent" wire:click="$dispatch('openModal', { component: 'modal-edit-offers' })">
-                    Get signup link
+                <button class="btn btn--sub-accent" wire:click="togglePrompt">
+                    {{ $type == 'employees' ? 'Get signup link' : 'Add new manager' }}
                 </button>
     
+                @if ( $type == 'employees' && $prompt )
                 <div class="bg-white rounded-lg drop-shadow-sm p-4 max-w-md w-full absolute top-12 right-0">
-                    <input type="text" class="mt-1 w-full rounded-md bg-[#FAFAFC] border border-sub-accent p-2" value="FordelPlus" />
+                    <input type="text" class="mt-1 w-full rounded-md bg-[#FAFAFC] border border-sub-accent p-2" value="{{ url('/register?token=132') }}" />
                 </div>
-    
+                @endif
+
+                @if ( $type == 'managers' && $prompt )
                 <div class="bg-white rounded-lg drop-shadow-sm p-4 max-w-md w-full absolute top-12 right-0">
                     <label for="email" class="text-sm text-black">Send invitation</label>
                     <div class="relative mt-1">
-                        <input type="text" id="email" class=" w-full rounded-md bg-[#FAFAFC] border border-sub-accent p-2" placeholder="Email address" />
+                      <form wire:submit="sendInvitation">
+                        <input type="text" id="email" wire:model="inviteEmail" class=" w-full rounded-md bg-[#FAFAFC] border border-sub-accent p-2" placeholder="Email address" />
                         <button class="btn btn--sub-accent !py-1 absolute right-1 top-1/2 -translate-y-1/2">
                             Send
                         </button>
+                      </form>
                    </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>
