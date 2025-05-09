@@ -12,7 +12,11 @@ class Invitation extends Model
     protected $fillable = [
         'email',
         'token',
-        'expires_at'
+        'type',
+        'expires_at',
+        'accepted_at',
+        'company_id',
+        'user_id'
     ];
 
     protected $casts = [

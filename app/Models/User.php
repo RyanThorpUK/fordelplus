@@ -7,11 +7,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Concerns\HasUlid;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, HasRoles, Notifiable, HasUlid, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -19,9 +23,12 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'type',
+        'company_id',
     ];
 
     /**
@@ -39,13 +46,10 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
 
     /**
      * Get the user's initials
@@ -56,5 +60,69 @@ class User extends Authenticatable
             ->explode(' ')
             ->map(fn (string $name) => Str::of($name)->substr(0, 1))
             ->implode('');
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(\App\Models\Company::class, 'company_id');
+    }
+
+    public function companies()
+    {
+        return $this->belongsToMany(\App\Models\Company::class);
+    }
+
+    // Role checking methods
+    public function isAdmin()
+    {
+        return $this->hasRole('admin');
+    }
+
+    public function isManager()
+    {
+        return $this->hasRole('manager');
+    }
+
+    public function isUser()
+    {
+        return !$this->hasRole('admin') && !$this->hasRole('manager');
+    }
+
+    // Permission methods
+    public function canEditCompany(Company $company)
+    {
+        return $this->hasRole('admin') || 
+            ($this->hasRole('manager') && $this->current_company_id === $company->id);
+    }
+
+    public function canViewCompany(Company $company)
+    {
+        return $this->hasRole('admin') || 
+            $this->current_company_id === $company->id;
+    }
+
+    public function canManageUsers()
+    {
+        return $this->hasRole('admin') || $this->hasRole('manager');
+    }
+
+    public function favourites()
+    {
+        return $this->hasMany(Favourite::class);
+    }
+
+    public function favouriteOffers()
+    {
+        return $this->belongsToMany(Offer::class, 'favourites');
+    }
+
+    public function hasFavourited(Offer $offer)
+    {
+        return $this->favourites()->where('offer_id', $offer->id)->exists();
+    }
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new \App\Notifications\VerifyEmail);
     }
 }

@@ -6,55 +6,82 @@
 
     <form wire:submit="register" class="flex flex-col gap-6">
         <!-- Name -->
-        <flux:input
-            wire:model="name"
-            :label="__('Name')"
-            type="text"
-            required
-            autofocus
-            autocomplete="name"
-            :placeholder="__('Full name')"
-        />
+        <div class="grid grid-cols-2 gap-6">
+            <div class="">
+                <label class="text-sm font-medium text-black mb-1 block">First name</label>
+                @error('first_name') 
+                    <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                @enderror
+                <input 
+                    type="text" 
+                    placeholder="First name"
+                    wire:model="first_name" 
+                    class="mt-1 w-full rounded-md bg-[#FAFAFC] border border-[#E3EBF5] p-2 @error('first_name') border-red-500 @enderror">
+            </div>
+            <div class="">
+                <label class="text-sm font-medium text-black mb-1 block">Last name</label>
+                @error('last_name') 
+                    <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                @enderror
+                <input 
+                    type="text" 
+                    placeholder="Last name"
+                    wire:model="last_name"
+                    class="mt-1 w-full rounded-md bg-[#FAFAFC] border border-[#E3EBF5] p-2  @error('last_name') border-red-500 @enderror">
+            </div>
+        </div>
 
-        <!-- Email Address -->
-        <flux:input
-            wire:model="email"
-            :label="__('Email address')"
-            type="email"
-            required
-            autocomplete="email"
-            placeholder="email@example.com"
-        />
+        <div class="grid grid-cols-2 gap-6">
+            <div class="col-span-2">
+                <label class="text-sm font-medium text-black mb-1 block">Email</label>
+                @error('email') 
+                    <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                @enderror
+                <input 
+                    type="email" 
+                    placeholder="Email"
+                    wire:model="email" 
+                    class="mt-1 w-full rounded-md bg-[#FAFAFC] border border-[#E3EBF5] p-2 @error('email') border-red-500 @enderror">
+            </div>
+        </div>
 
-        <!-- Password -->
-        <flux:input
-            wire:model="password"
-            :label="__('Password')"
-            type="password"
-            required
-            autocomplete="new-password"
-            :placeholder="__('Password')"
-        />
+        <div class="grid grid-cols-2 gap-6">
+            <div class="col-span-2">
+                <label class="text-sm font-medium text-black mb-1 block">Password</label>
+                @error('password') 
+                    <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                @enderror
+                <input 
+                    type="password" 
+                    placeholder="Password"
+                    wire:model="password" 
+                    class="mt-1 w-full rounded-md bg-[#FAFAFC] border border-[#E3EBF5] p-2 @error('password') border-red-500 @enderror">
+            </div>
+        </div>
 
-        <!-- Confirm Password -->
-        <flux:input
-            wire:model="password_confirmation"
-            :label="__('Confirm password')"
-            type="password"
-            required
-            autocomplete="new-password"
-            :placeholder="__('Confirm password')"
-        />
+        <div class="grid grid-cols-2 gap-6">
+            <div class="col-span-2">
+                <label class="text-sm font-medium text-black mb-1 block">Confirm password</label>
+                @error('password_confirmation') 
+                    <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                @enderror
+                <input 
+                    type="password" 
+                    placeholder="Confirm password"
+                    wire:model="password_confirmation" 
+                    class="mt-1 w-full rounded-md bg-[#FAFAFC] border border-[#E3EBF5] p-2 @error('password_confirmation') border-red-500 @enderror">
+            </div>
+        </div>
 
-        <div class="flex items-center justify-end">
-            <flux:button type="submit" variant="primary" class="w-full">
+        <div class="flex items-center justify-end ">
+            <button type="submit" class="btn btn--sub-accent w-full">
                 {{ __('Create account') }}
-            </flux:button>
+            </button>
         </div>
     </form>
 
     <div class="space-x-1 text-center text-sm text-zinc-600 dark:text-zinc-400">
         {{ __('Already have an account?') }}
-        <flux:link :href="route('login')" wire:navigate>{{ __('Log in') }}</flux:link>
+        <a href="{{ route('login') }}" class="text-sub-accent underline" wire:navigate>{{ __('Log in') }}</a>
     </div>
 </div>

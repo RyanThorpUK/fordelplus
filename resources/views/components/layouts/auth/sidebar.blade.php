@@ -7,17 +7,17 @@
         <flux:sidebar sticky stashable class="bg-primary z-10">
             <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
-            <a href="{{ route('dashboard') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
+            <a href="{{ route('admin.all-offers') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
                 <x-app-logo />
             </a>
 
             <flux:navlist variant="outline">
                 {{-- <flux:navlist.group :heading="__('Platform')" class="grid"> --}}
-                    <flux:navlist.item :href="route('all-offers')" :current="request()->routeIs('all-offers')" wire:navigate>{{ __('All offers') }}</flux:navlist.item>
+                    <flux:navlist.item :href="route('admin.all-offers')" :current="request()->routeIs('admin.all-offers')" wire:navigate>{{ __('Alle tilbud') }}</flux:navlist.item>
 
-                    <flux:navlist.item :href="route('users')" :current="request()->routeIs('users')" wire:navigate>{{ __('Users') }}</flux:navlist.item>
+                    <flux:navlist.item :href="route('admin.users')" :current="request()->routeIs('admin.users')" wire:navigate>{{ __('Users') }}</flux:navlist.item>
 
-                    <flux:navlist.item :href="route('business-info')" :current="request()->routeIs('business-info')" wire:navigate>{{ __('Business info') }}</flux:navlist.item>
+                    <flux:navlist.item :href="route('admin.business-info')" :current="request()->routeIs('admin.business-info')" wire:navigate>{{ __('Virksomhedsinfo') }}</flux:navlist.item>
                 {{-- </flux:navlist.group> --}}
             </flux:navlist>
 
@@ -72,7 +72,7 @@
                     <form method="POST" action="{{ route('logout') }}" class="w-full">
                         @csrf
                         <flux:menu.item as="button" type="submit" icon="arrow-right-start-on-rectangle" class="w-full">
-                            {{ __('Log Out') }}
+                            {{ __('Log ud') }}
                         </flux:menu.item>
                     </form>
                 </flux:menu>
@@ -122,7 +122,7 @@
                     <form method="POST" action="{{ route('logout') }}" class="w-full">
                         @csrf
                         <flux:menu.item as="button" type="submit" icon="arrow-right-start-on-rectangle" class="w-full">
-                            {{ __('Log Out') }}
+                            {{ __('Log ud') }}
                         </flux:menu.item>
                     </form>
                 </flux:menu>

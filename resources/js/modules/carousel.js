@@ -1,30 +1,59 @@
 import Swiper from 'swiper';
-import { Navigation, Pagination } from 'swiper/modules';
+// import { Pagination } from 'swiper/modules';
 // import Swiper and modules styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 class Carousel {
-  constructor() {
+  constructor(slideContainer) {
+    this.slideContainer = slideContainer;
+    this.slide = this.slideContainer.querySelectorAll('.swiper');
+    this.prev = this.slideContainer.querySelector('.js--slide-prev');
+    this.next = this.slideContainer.querySelector('.js--slide-next');
+
     this.init();
+
+    this.addEvents();
   }
 
   init() {
-    console.log('init');
-    this.swiper = new Swiper('.swiper', {
+
+    this.swiper = new Swiper(this.slide[0], {
         slidesPerView: "auto",
         spaceBetween: 30,
-        grabCursor: true,
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
+        grabCursor: true
     });
+
+    this.checkPagination();
+  }
+
+  addEvents() {
+    this.prev.addEventListener('click', () => {
+      this.swiper.slidePrev();
+    });
+
+    this.next.addEventListener('click', () => {
+      this.swiper.slideNext();
+    });
+
+    this.swiper.on('slideChange', () => {
+      this.checkPagination();
+    });
+  }
+
+  checkPagination() {
+
+    if (this.swiper.activeIndex === 0) {
+      this.prev.classList.add('!hidden');
+    } else {
+      this.prev.classList.remove('!hidden');
+      this.next.classList.remove('!hidden');
+    }
+
+    if (this.swiper.activeIndex === this.swiper.slides.length - 1) {
+      this.next.classList.add('!hidden');
+    }
   }
 }
 

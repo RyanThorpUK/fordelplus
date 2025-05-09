@@ -10,12 +10,12 @@
     @endif
 
     <div class="flex flex-col items-center justify-between space-y-3">
-        <flux:button wire:click="sendVerification" variant="primary" class="w-full">
+        <button wire:click="sendVerification" variant="primary" class="w-full btn btn--sub-accent">
             {{ __('Resend verification email') }}
-        </flux:button>
+        </button>
 
         <flux:link class="text-sm cursor-pointer" wire:click="logout">
-            {{ __('Log out') }}
+            {{ __('Log ud') }}
         </flux:link>
     </div>
 </div>

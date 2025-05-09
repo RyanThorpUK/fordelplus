@@ -27,22 +27,6 @@ $classes = Flux::classes()
 @endphp
 
 <flux:button-or-link :attributes="$attributes->class($classes)" data-flux-navlist-item>
-    <?php if ($icon): ?>
-        <div class="relative">
-            <?php if (is_string($icon) && $icon !== ''): ?>
-                <flux:icon :$icon :variant="$iconVariant" class="{!! $iconClasses !!}" />
-            <?php else: ?>
-                {{ $icon }}
-            <?php endif; ?>
-
-            <?php if ($iconDot): ?>
-                <div class="absolute top-[-2px] right-[-2px]">
-                    <div class="size-[6px] rounded-full bg-zinc-500 dark:bg-zinc-400"></div>
-                </div>
-            <?php endif; ?>
-        </div>
-    <?php endif; ?>
-
     <?php if ($slot->isNotEmpty()): ?>
         <div class="flex-1 text-base font-medium leading-none whitespace-nowrap [[data-nav-footer]_&]:hidden [[data-nav-sidebar]_[data-nav-footer]_&]:block" data-content>{{ $slot }}</div>
     <?php endif; ?>

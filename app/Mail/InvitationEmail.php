@@ -12,10 +12,12 @@ class InvitationEmail extends Mailable
     use Queueable, SerializesModels;
 
     public $invitation;
+    public $company;
 
-    public function __construct(Invitation $invitation)
+    public function __construct(Invitation $invitation, $company)
     {
         $this->invitation = $invitation;
+        $this->company = $company;
     }
 
     public function build()
@@ -23,7 +25,7 @@ class InvitationEmail extends Mailable
         $url = url("/register?token={$this->invitation->token}");
         
         return $this->markdown('emails.invitation')
-                    ->subject('You have been invited to join FordelPlus')
+                    ->subject($this->company->name . ' har inviteret dig til at blive manager på FordelPlus-platformen.')
                     ->with([
                         'url' => $url,
                         'expiresAt' => $this->invitation->expires_at->format('Y-m-d H:i:s')
