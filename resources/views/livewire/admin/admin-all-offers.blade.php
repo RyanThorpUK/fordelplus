@@ -1,4 +1,4 @@
-<div class="px-8 py-12 bg-[#e5e2dc] h-screen">
+<div class="px-4 sm:px-8 py-12 bg-[#e5e2dc] h-screen">
         
     <div class="flex justify-between items-center relative  mb-6">
         <div class="flex items-center gap-2">
@@ -44,7 +44,7 @@
                                 <span>{{ $offer->end_date->format('d/m/Y') }}</span>
                             </div>
                             <div class="flex items-center justify-end gap-x-4 px-2 text-sm">
-                                <button class="text-blue-500 flex flex-wrap items-center no-underline cursor-pointer" wire:click="$dispatch('openModal', { component: 'modal-edit-offers',  arguments: {
+                                <button class="text-sub-accent flex flex-wrap items-center no-underline cursor-pointer" wire:click="$dispatch('openModal', { component: 'modal-edit-offers',  arguments: {
                                     offer_ulid: '{{ $offer->ulid }}'
                                 } })">
                                     Rediger

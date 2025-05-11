@@ -22,7 +22,7 @@ $classes = Flux::classes()
     ->add('h-10 lg:h-8 relative flex items-center gap-3 rounded-lg')
     ->add($square ? 'px-2.5!' : '')
     ->add('py-0 text-left w-full px-3 my-px')
-    ->add('text-white hover:text-accent')
+    ->add('text-white hover:text-sub-accent')
     ;
 @endphp
 

@@ -33,7 +33,7 @@
                         'hidden' => $id !== $activeCategory
                     ]) data-id="{{ $id }}">
                         @foreach ($category['children'] as $childCategory)
-                            <li class="w-1/2 sm:w-auto">
+                            <li class="w-auto">
                                 <button type="button" data-id="{{ $childCategory['id'] }}" 
                                 wire:click="setActiveChildCategory({{ $childCategory['id'] }})"
                                 wire:navigate.preserve-scroll

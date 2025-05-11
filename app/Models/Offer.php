@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Scopes\OfferTypeScope;
 use App\Models\Concerns\HasUlid;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Support\Str;
 class Offer extends Model
 {
     use HasFactory, HasUlid, SoftDeletes;
@@ -54,6 +54,11 @@ class Offer extends Model
     public function category()
     {
         return $this->belongsTo(OfferCategory::class);
+    }
+
+    public function shortDescription($limit = 100)
+    {
+        return Str::limit($this->description, $limit);
     }
 
     public function getCategoryList()

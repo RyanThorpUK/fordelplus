@@ -46,7 +46,8 @@
 			margin: 0;
 			padding: 0;
 			-webkit-text-size-adjust: 100%;
-			-ms-text-size-adjust: 100%
+			-ms-text-size-adjust: 100%;
+			background: #E5E2DC;
 		}
 
 		table,

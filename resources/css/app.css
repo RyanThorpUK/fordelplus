@@ -84,7 +84,7 @@ select:focus[data-flux-control] {
 
 
 .btn{
-    @apply px-4 py-2 rounded-md cursor-pointer;
+    @apply px-4 py-2 rounded-md cursor-pointer transition-colors ease-in-out duration-300;
 }
 
 .btn--transparent{
@@ -92,7 +92,7 @@ select:focus[data-flux-control] {
 }
 
 .btn--sub-accent{
-    @apply bg-sub-accent text-primary;
+    @apply bg-sub-accent text-primary ;
 }
 
 .btn--sub-accent:hover{
@@ -113,10 +113,6 @@ select:focus[data-flux-control] {
 
 .btn--accent:hover{
     @apply bg-accent/80;
-}
-
-.btn--sub-accent{
-    @apply bg-sub-accent text-white;
 }
 
 .btn--sub-accent:hover{

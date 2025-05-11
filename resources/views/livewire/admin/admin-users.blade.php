@@ -1,48 +1,22 @@
-<div class="px-8 py-12 bg-offset-tan h-screen">
+<div class="px-4 sm:px-8 py-12 bg-offset-tan h-screen">
     <livewire:components.notification />
     <div>
         <div class="flex justify-between items-center relative">
-            <div class="flex items-center gap-2">
-                <h1 class="text-3xl font-extrabold">Users</h1>
+            <div class="flex flex-col md:flex-row  gap-2">
+                <h1 class="text-3xl font-semibold text-primary">Users</h1>
     
-                <ul class="flex items-center gap-6 ml-6 pl-6">
-                    <li class="border-l border-black pl-6">
-                        <a href="{{ route('admin.users', ['type' => 'employees']) }}" class="text-sm text-gray-500 hover:text-sub-accent transition-colors duration-300 @if($type == 'employees') text-sub-accent @endif">Medlemmer</a>
+                <ul class="flex  gap-6 md:ml-6">
+                    <li class="">
+                        <a href="{{ route('admin.users', ['type' => 'employees']) }}" class="cursor-pointer flex rounded-2xl px-4 py-1 sm:px-6 hover:bg-primary hover:text-white transition-colors ease-in-out duration-300 text-xs md:text-base @if($type == 'employees') bg-primary text-white @else text-primary @endif">Medlemmer</a>
                     </li>
-                    <li class="border-l border-black pl-6">
-                        <a href="{{ route('admin.users', ['type' => 'managers']) }}" class="text-sm text-gray-500 hover:text-sub-accent transition-colors duration-300 @if($type == 'managers') text-sub-accent @endif">{{ __('Admins') }}</a>
+                    <li class="">
+                        <a href="{{ route('admin.users', ['type' => 'managers']) }}" class="cursor-pointer flex rounded-2xl px-4 py-1 sm:px-6 hover:bg-primary hover:text-white transition-colors ease-in-out duration-300 text-xs md:text-base @if($type == 'managers') bg-primary text-white @else text-primary @endif">Admins</a>
                     </li>
                 </ul>
             </div>
     
-            <div class="">
-                <button class="btn btn--sub-accent" wire:click="togglePrompt">
-                    {{ $type == 'employees' ? 'Få oprettelses link' : 'Tilføj ny admin' }}
-                </button>
-    
-                @if ( $type == 'employees' && $prompt )
-                <div class="bg-white rounded-lg drop-shadow-sm p-4 max-w-md w-full absolute top-12 right-0">
-                    <input type="text" class="mt-1 w-full rounded-md bg-[#FAFAFC] border border-sub-accent p-2" value="{{ url('/register?token=' . $company->userInviteToken->token) }}" />
-                </div>
-                @endif
-
-                @if ( $type == 'managers' && $prompt )
-                <div class="bg-white rounded-lg drop-shadow-sm p-4 max-w-md w-full absolute top-12 right-0">
-                    @if (!session()->has('message'))
-                    <label for="email" class="text-sm text-black">Tilføj admin</label>
-                    <div class="relative mt-1">
-                      <form wire:submit="sendInvitation">
-                        <input type="text" id="email" wire:model="inviteEmail" class=" w-full rounded-md bg-[#FAFAFC] border border-sub-accent p-2" placeholder="Email address" />
-                        <button class="btn btn--sub-accent !py-1 absolute right-1 top-1/2 -translate-y-1/2">
-                            Send indvitation
-                        </button>
-                      </form>
-                   </div>
-                   @else
-                    {{ session('message') }}
-                   @endif
-                </div>
-                @endif
+            <div class="hidden md:block">
+                <livewire:user-invitation :type="$type" :token="$company->userInviteToken->token" />
             </div>
         </div>
     </div>
@@ -50,7 +24,7 @@
     
     <div class="mt-4">
         <div class="">
-            <div class="grid grid-cols-4 w-full items-center px-2">
+            <div class="grid-cols-4 w-full items-center px-2 hidden md:grid">
                 <div class="px-2 py-1">
                     <span class="text-sm text-gray-500">Navn</span>
                 </div>
@@ -86,10 +60,10 @@
                                     wire:target="sendResetLink('{{ $user->ulid }}')"
                                 >
                                     <span wire:loading.remove wire:target="sendResetLink('{{ $user->ulid }}')">
-                                        Reset Password
+                                        Nulstil adgangskode
                                     </span>
                                     <span wire:loading wire:target="sendResetLink('{{ $user->ulid }}')">
-                                        Sending...
+                                        Sender...
                                     </span>
                                 </button>
 
@@ -98,7 +72,7 @@
                                     user_ulid: '{{ $user->ulid }}'
                                 } })"
                                  >
-                                    Edit
+                                 Redigere
                                 </button>
                             </div>
                         </div>
@@ -106,7 +80,7 @@
                 @else
                     <div class="bg-white px-2 py-4 border border-[#E0E5EE] rounded-md grid grid-cols-4 w-full items-center">
                         <div class="px-2">
-                            <span>No users found</span>
+                            <span>Ingen brugere fundet</span>
                         </div>
                     </div>
                 @endif

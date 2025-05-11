@@ -1,15 +1,14 @@
-<div>
+<div class="bg-offset-tan flex flex-col">
     <livewire:components.notification />
 
-    <div class="">
-        <div class="bg-white">
-            <div class="flex max-w-7xl mx-auto pt-28 pb-8 relative">
-
-                <div class="bg-[#F9FAFE] border-6 border-white rounded-3xl max-w-sm mx-auto absolute top-16 right-0 shadow-lg">
+    <div class="order-2 md:order-1">
+        <div class="">
+            <div class="flex flex-col md:flex-row max-w-7xl px-2 sm:px-4 mx-auto md:pt-28 relative">
+                <div class="order-2 md:order-1 bg-[#F9FAFE] rounded-md w-full md:w-auto md:max-w-sm mx-auto md:absolute top-16 right-0 shadow-lg">
                     <div class="p-3 flex flex-col gap-2">
                         <div class="grid grid-cols-2 gap-4 border-b border-gray-200 pb-2 mb-2">
                             <div class="text-sm">
-                             <strong>Detaljer</strong>
+                                <strong class="text-primary">Detaljer</strong>
                              </div>
                              <div class="text-right text-sub-accent text-sm gap-2">
                                  <button 
@@ -72,33 +71,33 @@
                          
                     </div>
                 </div>
-
-                <div class="flex flex-col gap-4">
-                    <h1 class="text-5xl font-bold max-w-2xl text-black">
-                        Din side
-                    </h1>
-                </div>
             </div>
         </div>
-    
     </div>
 
-    <div class="js--offer-selector">
+    <div class="js--offer-selector // bg-offset-tan order-1 md:order-2">
     
-        <div class="bg-white">
-            <div class="flex max-w-7xl mx-auto px-2 sm:px-4 over">
-                <ul class="js--offer-selector-parent // flex flex-wrap gap-2 sm:gap-4">
-                    <li>
-                        <button type="button" data-id="gemte-tilbud" 
-                        wire:click="setActiveCategory('gemte-tilbud')"
-                        class="js--offer-selector-parent-button // cursor-pointer block px-2 py-2 sm:px-4 border-b-2 {{ 'gemte-tilbud' == $activeCategory ? ' border-primary' : 'border-transparent' }} hover:border-primary text-xs sm:text-base">Gemte tilbud</button>
-                    </li>
-                </ul>
+        <div class="">
+            <div class="flex max-w-7xl flex-col mx-auto px-2 sm:px-4 over">
+
+                <h1 class="text-2xl md:text-5xl text-center md:text-left font-semibold max-w-2xl text-primary mt-12 mb-6">
+                    Din side
+                </h1>
+
+                <div class="w-full">
+                    <ul class="js--offer-selector-parent // flex flex-wrap justify-center md:justify-start mb-6 gap-2 sm:gap-4">
+                        <li>
+                            <button type="button" data-id="gemte-tilbud" 
+                            wire:click="setActiveCategory('gemte-tilbud')"
+                            class="js--offer-selector-parent-button // cursor-pointer rounded-2xl px-4 py-1 sm:px-6 hover:bg-primary hover:text-white transition-colors ease-in-out duration-300 text-xs md:text-base {{ 'gemte-tilbud' == $activeCategory ? ' bg-primary text-white' : 'text-primary' }}">Gemte tilbud</button>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         
     
-        <div class="bg-[#F9FAFE]">
+        <div class="">
             <div class="flex flex-col max-w-7xl mx-auto pb-8 sm:pb-16 pt-2 sm:pt-4.5 px-2 sm:px-4">
                 <div class="flex flex-col gap-4 w-full">
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

@@ -14,8 +14,12 @@ class VerifyEmailController extends Controller
      */
     public function __invoke(EmailVerificationRequest $request): RedirectResponse
     {
-        if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(route('company', ['company' => $request->user()->company_id]).'?verified=1');
+
+        $user = $request->user();
+        $company = $user->company;
+        
+        if ($user->hasVerifiedEmail()) {
+            return redirect()->intended(route('company', ['company_ulid' => $company->ulid]).'?verified=1');
         }
 
         if ($request->user()->markEmailAsVerified()) {
@@ -25,6 +29,6 @@ class VerifyEmailController extends Controller
             event(new Verified($user));
         }
 
-        return redirect()->intended(route('company', ['company' => $user->company_id]).'?verified=1');
+        return redirect()->intended(route('company', ['company_ulid' => $company->ulid]).'?verified=1');
     }
 }

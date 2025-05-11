@@ -17,7 +17,7 @@ class SidebarSelector extends Component
         $user = auth()->user();
 
         // Check if the company exists and the user is associated with it
-        if ($company && $user->companies->contains($company)) {
+        if ($company && (( $user->companies->contains($company)) || $user->hasRole('admin'))) {
             $user->company_id = $company->id;
             $user->save();
         }

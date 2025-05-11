@@ -56,7 +56,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function initials(): string
     {
-        return Str::of($this->name)
+        return Str::of($this->first_name . ' ' . $this->last_name)
             ->explode(' ')
             ->map(fn (string $name) => Str::of($name)->substr(0, 1))
             ->implode('');
@@ -92,13 +92,13 @@ class User extends Authenticatable implements MustVerifyEmail
     public function canEditCompany(Company $company)
     {
         return $this->hasRole('admin') || 
-            ($this->hasRole('manager') && $this->current_company_id === $company->id);
+            ($this->hasRole('manager') && $this->company_id === $company->id);
     }
 
     public function canViewCompany(Company $company)
     {
         return $this->hasRole('admin') || 
-            $this->current_company_id === $company->id;
+            $this->company_id === $company->id;
     }
 
     public function canManageUsers()

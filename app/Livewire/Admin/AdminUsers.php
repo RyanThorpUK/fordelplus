@@ -18,19 +18,15 @@ class AdminUsers extends Component
 {
     use WithPagination;
 
-    public $inviteEmail;
     public $type = 'employees';
-    public $prompt = false;
     public $company;
 
     protected $rules = [
         'inviteEmail' => 'required|email'
     ];
 
-    public function mount($type = 'employees')  
+    public function mount()  
     {
-        $this->type = $type;
-        $this->prompt = false;
         $this->company = auth()->user()->company;
     }
 
@@ -39,48 +35,6 @@ class AdminUsers extends Component
     {
         // Reset pagination when new data is added
         $this->resetPage();
-    }
-
-    public function togglePrompt()
-    {
-        $this->prompt = !$this->prompt;
-    }
-
-    public function sendInvitation()
-    {
-        $this->validate();
-        
-        $user = request()->user();
-        
-        $company = $user->company;
-
-        // Generate unique token
-        $token = Str::random(32);
-
-        // Create invitation record
-        $invitation = Invitation::create([
-            'email' => $this->inviteEmail,
-            'type' => 'user',
-            'token' => $token,
-            'company_id' => $this->company->id,
-            'expires_at' => now()->addDays(7),
-            'user_id' => $user->id
-        ]);
-
-        $invitation_url = URL::signedRoute('register', [
-            'token' => $invitation->token
-        ]);
-
-
-        // Send notification instead of Mail
-        Notification::route('mail', $this->inviteEmail)
-            ->notify(new InviteUser($invitation_url));
-
-        // Reset form
-        $this->reset('inviteEmail');
-
-        // Show success message
-        session()->flash('message', 'Invitation sent successfully!');
     }
 
     public function sendResetLink($userId)
