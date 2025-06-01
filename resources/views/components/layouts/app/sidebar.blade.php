@@ -20,6 +20,8 @@
                     <flux:navlist.item :href="route('admin.users')" :current="request()->routeIs('admin.users')" wire:navigate>{{ __('Brugere') }}</flux:navlist.item>
 
                     <flux:navlist.item :href="route('admin.business-info')" :current="request()->routeIs('admin.business-info')" wire:navigate>{{ __('Virksomhedsinfo') }}</flux:navlist.item>
+
+                    <flux:navlist.item :href="route('admin.online-profil')" :current="request()->routeIs('admin.online-profil')" wire:navigate>{{ __('Online Profil') }}</flux:navlist.item>
                 {{-- </flux:navlist.group> --}}
             </flux:navlist>
 

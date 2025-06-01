@@ -1,8 +1,9 @@
-<flux:header container class="bg-primary py-3 px-4">
+<flux:header container class="bg-white py-2 px-4">
     <div class="flex items-center w-full">
-        <a href="/" class="mr-3 flex items-center space-x-2 lg:ml-0" wire:navigate>
+        <a href="/" class="mr-3 flex items-center space-x-2 lg:ml-0 -mt-2" wire:navigate>
             <div class="grid flex-1 text-left text-2xl sm:text-3xl">
-                <img src="/img/FordelPlus-blue.png" alt="FordelPlus" class="h-10">
+                <img src="/img/fordelplus-logo.svg" alt="FordelPlus" class="h-10">
+                <span class="text-white bg-primary">{{ request()->user()->type }}</span>
             </div>
         </a>
 

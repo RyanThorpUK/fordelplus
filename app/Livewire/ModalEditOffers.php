@@ -161,6 +161,6 @@ class ModalEditOffers extends ModalComponent
 
     public static function modalMaxWidth(): string
     {
-        return '2xl';
+        return '4xl';
     }
 }

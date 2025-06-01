@@ -15,7 +15,8 @@ class Home extends Component
     public function mount()
     {
         // Get first 3 offers
-        $this->premiumOffers = Offer::limit(3)->where('start_date', '<=', now())->where('end_date', '>=', now())->get();
+        
+        $this->premiumOffers = Offer::whereIn('id', [62, 56, 24])->where('start_date', '<=', now())->where('end_date', '>=', now())->get();
 
         // // Get remaining offers
         // $this->offers = Offer::skip(3)->take(20)->get();

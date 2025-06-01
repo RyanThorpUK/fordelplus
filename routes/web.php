@@ -16,6 +16,7 @@ use App\Livewire\Admin\AdminOffer;
 use App\Livewire\Admin\AdminAllOffers;
 use App\Livewire\Admin\AdminUsers;
 use App\Livewire\Admin\AdminBusinessInfo;
+use App\Livewire\Admin\AdminOnlineProfil;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\UserController;
@@ -40,6 +41,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             // Route::get('/alle-tilbud/{offer}', AdminOffer::class)->name('admin.offer');
             Route::get('brugere/{type?}', AdminUsers::class)->name('admin.users');
             Route::get('business-info', AdminBusinessInfo::class)->name('admin.business-info');
+            Route::get('online-profil', AdminOnlineProfil::class)->name('admin.online-profil');
         });
     });
     
