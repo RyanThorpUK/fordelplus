@@ -9,9 +9,9 @@
 
         <div class="flex justify-between items-center relative  mb-6">
             <div class="flex items-center gap-2">
-                <h1 class="text-3xl font-semibold text-primary">Online Profil</h1>
+                <h1 class="text-3xl font-semibold">Online Profil</h1>
 
-                <div class="flex gap-2 p-2 ml-12">
+                {{-- <div class="flex gap-2 p-2 ml-12">
                     <form action="" class="flex gap-2">
                         <div>
                             <div
@@ -38,11 +38,11 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                </div> --}}
             </div>
 
             <div class="">
-                <button class="btn btn--sub-accent"
+                <button class="btn btn---primary !rounded-lg"
                     wire:click="$dispatch('openModal', { component: 'modal-edit-offers' })">
                     Tilføj nyt tilbud
                 </button>
@@ -56,7 +56,7 @@
         <div class="bg-white rounded-xl py-4 px-8">
             <div class="flex flex-wrap gap-4">
                 <div class="w-40">
-                    <h3 class="text-sm font-semibold text-primary mb-3">Logo</h3>
+                    <h3 class="text-sm font-semibold text-primary-200 mb-3">Logo</h3>
                     <ul class="text-xs text-gray-500 list-inside list-['-_']">
                         <li>
                             1200 X 1200 px.
@@ -79,7 +79,7 @@
                         </label>
                         <input type="file" id="logo" wire:model="logo" class="hidden">
                     </div>
-                    <label for="logo" class="btn btn--sub-accent mt-2 inline-block">{{ $company->logo ? 'Skift logo' :
+                    <label for="logo" class="btn btn---primary !rounded-md mt-2 inline-block">{{ $company->logo ? 'Skift logo' :
                         'Upload logo' }}</label>
                     @error('logo') <span class="error">{{ $message }}</span> @enderror
                 </div>
@@ -90,7 +90,7 @@
             <div class="bg-white rounded-xl py-4 px-8 mt-6">
                 <div class="flex flex-wrap gap-4">
                     <div class="w-40">
-                        <h3 class="text-sm font-semibold text-primary mb-3">Logo</h3>
+                        <h3 class="text-sm font-semibold text-primary-200 mb-3">Logo</h3>
                         <ul class="text-xs text-gray-500 list-inside list-['-_']">
                             <li>
                                 1200 X 800 px.
@@ -114,7 +114,7 @@
                             </label>
                             <input type="file" id="logo" wire:model="logo" class="hidden">
                         </div>
-                        <label for="logo" class="btn btn--sub-accent mt-2 inline-block">{{ $company->logo ? 'Skift logo'
+                        <label for="logo" class="btn btn---primary !rounded-md mt-2 inline-block">{{ $company->logo ? 'Skift logo'
                             : 'Upload logo' }}</label>
                         @error('logo') <span class="error">{{ $message }}</span> @enderror
                     </div>
@@ -123,7 +123,7 @@
             <div class="bg-white rounded-xl py-4 px-8 mt-6">
                 <div class="grid grid-cols-4 gap-4">
                     <div class="col-span-1">
-                        <h3 class="text-sm font-semibold text-primary mb-3">Billede</h3>
+                        <h3 class="text-sm font-semibold text-primary-200 mb-3">Billede</h3>
                         <ul class="text-xs text-gray-500 list-inside list-['-_']">
                             <li>
                                 1200 X 450 px.
@@ -147,7 +147,7 @@
                             </label>
                             <input type="file" id="logo" wire:model="logo" class="hidden">
                         </div>
-                        <label for="logo" class="btn btn--sub-accent mt-2 inline-block">{{ $company->logo ? 'Skift logo'
+                        <label for="logo" class="btn btn---primary !rounded-md mt-2 inline-block">{{ $company->logo ? 'Skift logo'
                             : 'Upload logo' }}</label>
                         @error('logo') <span class="error">{{ $message }}</span> @enderror
                     </div>
@@ -158,7 +158,7 @@
         <div class="bg-white rounded-xl py-4 px-8 mt-6">
             <div class="flex flex-wrap gap-4 mb-4">
                 <div class="w-40">
-                    <h3 class="text-sm font-semibold text-primary mb-3">Page Title</h3>
+                    <h3 class="text-sm font-semibold mb-3">Page Title</h3>
                 </div>
                 <div class="flex-1">
                     <input type="text" wire:model="page_title" class="mt-1 w-full rounded-md bg-[#F8F8F8] p-2">
@@ -167,7 +167,7 @@
             </div>
             <div class="flex flex-wrap gap-4">
                 <div class="w-40">
-                    <h3 class="text-sm font-semibold text-primary mb-3">Description</h3>
+                    <h3 class="text-sm font-semibold text-primary-200 mb-3">Description</h3>
                 </div>
                 <div class="flex-1">
                     <textarea wire:model="description" class="mt-1 w-full h-30 rounded-md bg-[#F8F8F8] p-2"></textarea>
@@ -181,17 +181,17 @@
             <div class="bg-white rounded-xl py-4 px-8 mt-6">
                 <div class="flex flex-wrap gap-4">
                     <div class="w-40">
-                        <h3 class="text-sm font-semibold text-primary mb-3">Kontakt info</h3>
+                        <h3 class="text-sm font-semibold text-primary-200 mb-3">Kontakt info</h3>
                     </div>
                     <div class="flex-1">
                         <div class="w-full mb-4">
-                            <label for="name" class="block mb-1 text-primary text-xs font-medium">Telefon</label>
+                            <label for="name" class="block mb-1 text-primary-200 text-xs font-medium">Telefon</label>
                             <input type="text" wire:model="name" placeholder="Telefon"
                                 class="w-full h-10 rounded-md bg-[#F8F8F8] border border-[#E3EBF5] p-2">
                             @error('name') <span class="error">{{ $message }}</span> @enderror
                         </div>
                         <div class="w-full">
-                            <label for="name" class="block mb-1 text-primary text-xs font-medium">Email</label>
+                            <label for="name" class="block mb-1 text-primary-200 text-xs font-medium">Email</label>
                             <input type="text" wire:model="name" placeholder="Email"
                                 class="w-full h-10 rounded-md bg-[#F8F8F8] border border-[#E3EBF5] p-2">
                             @error('name') <span class="error">{{ $message }}</span> @enderror
@@ -202,22 +202,22 @@
             <div class="bg-white rounded-xl py-4 px-8 mt-6">
                 <div class="flex flex-wrap gap-4">
                     <div class="w-40">
-                        <h3 class="text-sm font-semibold text-primary mb-3">Kontakt info</h3>
+                        <h3 class="text-sm font-semibold text-primary-200 mb-3">Kontakt info</h3>
                     </div>
                     <div class="flex-1">
                         <div class="w-full mb-4">
                             <div class="flex gap-2 p-2">
                                 <div>
-                                    <label class="flex cursor-pointer items-center justify-center text-xs text-primary peer-checked:text-black" for="b2b">
+                                    <label class="flex cursor-pointer items-center justify-center text-xs text-primary-200 peer-checked:text-black" for="b2b">
                                         <input class="peer sr-only" wire:model="offerUserType" value="b2b" name="user-type" id="b2b" type="radio" />
-                                        <span class="w-4 h-4 rounded-sm bg-white border border-[#E4ECF5] mr-2 text-white peer-checked:text-primary text-center">&check;</span>
+                                        <span class="w-4 h-4 rounded-sm bg-white border border-[#E4ECF5] mr-2 text-white peer-checked:text-primary-200 text-center">&check;</span>
                                         Aktiv
                                     </label>
                                 </div>
                             </div>
                         </div>
                         <div class="w-full">
-                            <label for="name" class="block mb-1 text-primary text-xs font-medium">Email</label>
+                            <label for="name" class="block mb-1 text-primary-200 text-xs font-medium">Email</label>
                             <input type="text" wire:model="name" placeholder="Email"
                                 class="w-full h-10 rounded-md bg-[#F8F8F8] border border-[#E3EBF5] p-2">
                             @error('name') <span class="error">{{ $message }}</span> @enderror

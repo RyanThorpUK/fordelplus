@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="">
     <head>
         @include('partials.head')
     </head>
     <body class="bg-offset-tan">
 
-        @include('components.layouts.partials.nav')
+        {{-- @include('components.layouts.partials.nav') --}}
 
-        <div class="relative flex flex-col items-center justify-center gap-6 p-4 sm:p-6 md:p-10 mb-12 min-h-[60vh]">
-            <div class="flex flex-col md:flex-row max-w-7xl w-full mx-auto">
+        <div class="relative flex flex-col items-center justify-center gap-6 p-4 sm:p-6 md:p-10 h-screen">
+            <div class="flex flex-col md:flex-row w-full">
                 <div class="w-full md:w-1/2"></div>
                 <div class="w-full md:w-1/2 flex items-center justify-center">
                     <div class="flex flex-col gap-6 max-w-sm w-full">
@@ -16,8 +16,9 @@
                     </div>
                 </div>
             </div>
-            <div class="hidden md:block bg-primary rounded-tr-3xl rounded-br-3xl absolute bottom-0 left-0 w-1/2 h-[90%] overflow-hidden">
-                <img src="{{ asset('img/auth/login-image.jpg') }}" alt="" class="w-full h-full object-cover">
+            <div class="hidden md:flex items-center justify-center absolute bottom-0 left-0 w-1/2 h-full overflow-hidden">
+                <img src="{{ asset('img/auth/login.png') }}" alt="" class="mt-12">
+                {{-- <img src="{{ asset('img/auth/login-bg.png') }}" alt="" class="w-full h-full object-cover"> --}}
             </div>
         </div>
         
@@ -39,7 +40,7 @@
                 </div>
             </div>
         </div> --}}
-        @include('components.layouts.partials.footer')
+        {{-- @include('components.layouts.partials.footer') --}}
 
         @fluxScripts
     </body>

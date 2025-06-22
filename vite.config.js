@@ -12,6 +12,7 @@ export default defineConfig({
         }),
         tailwindcss({
             config: './tailwind.config.js',
+            darkMode: false,
         }),
     ],
     server: {

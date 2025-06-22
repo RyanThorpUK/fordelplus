@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use LivewireUI\Modal\ModalComponent;
 use App\Livewire\Admin\AdminAllOffers;
+use App\Models\Scopes\OfferTypeScope;
 
 class ModalEditOffers extends ModalComponent
 {
@@ -25,6 +26,8 @@ class ModalEditOffers extends ModalComponent
         $offerCode,
         $offerLink,
         $offerEmail,
+        $offerHighlight,
+        $offerHighlightType = 'price',
         $offerFields,
         $offerDescription,
         $offerQuantity,
@@ -38,16 +41,28 @@ class ModalEditOffers extends ModalComponent
         'offerName' => 'required',
         'offerStartDate' => 'required|date',
         'offerEndDate' => 'required|date',
+        'offerHighlight' => 'nullable',
+        'offerHighlightType' => 'nullable',
         'offerUserType' => 'required',
         'offerType' => 'required',
-        'offerCode' => 'required_if:offerType,discount-code',
         'offerLink' => 'required_if:offerType,discount-code',
         'offerEmail' => 'required_if:offerType,contact-form',
-        // 'offerFields' => 'required_if:offerType,contact-form',
+        'offerImage' => 'nullable',
         'offerDescription' => 'required',
         'offerCategory' => 'required',
-        // 'offerQuantity' => 'required',
     ];
+
+    protected function rules()
+    {
+        $rules = $this->rules;
+        
+        // Only validate image if it's a new upload
+        if (is_object($this->offerImage)) {
+            $rules['offerImage'] = 'image|mimes:jpeg,png,jpg,gif,svg|max:528';
+        }
+        
+        return $rules;
+    }
 
     public function render()
     {
@@ -62,20 +77,23 @@ class ModalEditOffers extends ModalComponent
         ->with('children')
         ->get();
 
+
         if ($offer_ulid) { 
 
-            $this->offer = Offer::where('ulid', $offer_ulid)->first();
+            $this->offer = Offer::withoutGlobalScope(OfferTypeScope::class)->where('ulid', $offer_ulid)->first();
 
             if ($this->offer) {
                 $this->offerName = $this->offer->name;
                 $this->offerImage = $this->offer->image;
                 $this->offerStartDate = $this->offer->start_date->format('Y-m-d');
                 $this->offerEndDate = $this->offer->end_date->format('Y-m-d');
-                $this->offerUserType = $this->offer->user_type;
+                $this->offerUserType = (int) $this->offer->user_type;
                 $this->offerType = $this->offer->offer_type;
                 $this->offerCode = $this->offer->offer_code;
                 $this->offerLink = $this->offer->offer_link;
                 $this->offerDescription = $this->offer->description;
+                $this->offerHighlight = $this->offer->highlight;
+                $this->offerHighlightType = $this->offer->highlight_type ?? 'price';
                 $this->offerQuantity = $this->offer->quantity;
                 $this->offerCategory = $this->offer->category_id;
                 $this->offerEmail = $this->offer->offer_email;
@@ -99,8 +117,7 @@ class ModalEditOffers extends ModalComponent
 
     public function update()
     {
-
-        $this->validate();
+        $this->validate($this->rules());
 
         $data = [
             'name' => $this->offerName,
@@ -108,9 +125,10 @@ class ModalEditOffers extends ModalComponent
             'start_date' => $this->offerStartDate,
             'end_date' => $this->offerEndDate,
             'type' => $this->offerType,
-            'user_type' => $this->offerUserType,
+            'user_type' => (int) $this->offerUserType,
             'offer_type' => $this->offerType,
-
+            'highlight' => $this->offerHighlight,
+            'highlight_type' => $this->offerHighlightType,
             // 'offer_email' => $this->offerEmail,
             // 'offer_fields' => $this->offerFields,
             'offer_code' => $this->offerCode,

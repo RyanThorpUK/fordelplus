@@ -237,21 +237,21 @@ img {
 
 .button-blue,
 .button-primary {
-    background-color: #78FAAE;
-    border-bottom: 8px solid #78FAAE;
-    border-left: 18px solid #78FAAE;
-    border-right: 18px solid #78FAAE;
-    border-top: 8px solid #78FAAE;
-    color: #154148;
+    background-color: #0d826e;
+    border-bottom: 8px solid #0d826e;
+    border-left: 18px solid #0d826e;
+    border-right: 18px solid #0d826e;
+    border-top: 8px solid #0d826e;
+    color: #ffffff!important;
 }
 
 .button-green,
 .button-success {
-    background-color: #48bb78;
-    border-bottom: 8px solid #48bb78;
-    border-left: 18px solid #48bb78;
-    border-right: 18px solid #48bb78;
-    border-top: 8px solid #48bb78;
+    background-color: #0d826e;
+    border-bottom: 8px solid #0d826e;
+    border-left: 18px solid #0d826e;
+    border-right: 18px solid #0d826e;
+    border-top: 8px solid #0d826e;
 }
 
 .button-red,

@@ -17,7 +17,8 @@
         "spatie/laravel-permission": "^6.16",
         "symfony/http-client": "^7.2",
         "symfony/postmark-mailer": "^7.2",
-        "wire-elements/modal": "2.0.13"
+        "wire-elements/modal": "2.0.13",
+        "wire-elements/pro": "^4.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.15",
@@ -46,6 +47,10 @@
         {
             "type": "composer",
             "url": "https://nova.laravel.com"
+        },
+        {
+            "type": "composer",
+            "url": "https://wire-elements-pro.composer.sh"
         }
     ],
     "scripts": {

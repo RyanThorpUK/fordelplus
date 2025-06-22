@@ -1,4 +1,4 @@
-<flux:sidebar stashable sticky class="lg:hidden border-r border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
+<flux:sidebar stashable sticky class="lg:hidden border-r border-zinc-200 bg-zinc-50">
             <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
             <a href="{{ route('admin.all-offers') }}" class="flex items-center space-x-2 bg-white py-3" wire:navigate>

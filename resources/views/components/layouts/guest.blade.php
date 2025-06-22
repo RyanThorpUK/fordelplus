@@ -4,3 +4,4 @@
     </flux:main>
 </x-layouts.app.header>
 @livewire('wire-elements-modal')
+@livewire('slide-over-pro')

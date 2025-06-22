@@ -8,14 +8,14 @@
 
         <div class="flex justify-between items-center relative mb-6">
             <div class="flex items-center gap-2">
-                <h1 class="text-3xl font-semibold text-primary">Virksomhedsinfo</h1>
+                <h1 class="text-3xl font-semibold">Virksomhedsinfo</h1>
             </div>
         </div>
 
         <div class="bg-white rounded-xl py-4 px-8 mt-6">
             <div class="flex flex-wrap gap-4">
                 <div class="w-40">
-                    <h3 class="text-sm font-semibold text-primary mb-3">Information</h3>
+                    <h3 class="text-sm font-semibold text-primary-200 mb-3">Information</h3>
                 </div>
                 <div class="flex-1 grid grid-cols-3 gap-4">
                     <div class="col-span-1">
@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="col-span-2 mt-4">
-                        <button type="submit" class="btn btn--sub-accent">
+                        <button type="submit" class="btn btn---primary !rounded-md">
                             Gem ændringer
                         </button>
                     </div>

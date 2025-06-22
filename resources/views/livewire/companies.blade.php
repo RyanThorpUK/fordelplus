@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="flex flex-wrap gap-2 sm:gap-4 items-center">
                                     <span><span class="underline">{{ $company->active_offers_count }}</span> Tilbud</span>
-                                    <a href="{{ route('company', $company->ulid) }}" class="btn btn--sub-accent text-xs sm:text-sm">Gå til virksomhed</a>
+                                    <a href="{{ route('company.show', $company->ulid) }}" class="btn btn--sub-accent text-xs sm:text-sm">Gå til virksomhed</a>
                                 </div>
                             </div>
                         @endforeach

@@ -39,7 +39,7 @@ class Register extends Component
         $this->invitation = \DB::table('user_invitations')
             ->where('token', request()->token)
             ->whereNull('accepted_at')
-            ->where('expires_at', '>', now())
+            // ->where('expires_at', '>', now())
             ->first();
 
         if (!$this->invitation) {
@@ -58,7 +58,7 @@ class Register extends Component
         return \DB::table('user_invitations')
             ->where('token', $token)
             ->whereNull('accepted_at')
-            ->where('expires_at', '>', now())
+            // ->where('expires_at', '>', now())
             ->exists();
     }
 
@@ -76,6 +76,7 @@ class Register extends Component
 
         $validated['password'] = Hash::make($validated['password']);
         $validated['company_id'] = $this->company->id;
+        $validated['type'] = 1;
 
         $user = User::create($validated);
 
@@ -94,6 +95,6 @@ class Register extends Component
         event(new Registered($user));
         Auth::login($user);
         
-        $this->redirect(route('verification.notice', absolute: false), navigate: true);
+        $this->redirect(route('verification.notice', absolute: false), navigate: false);
     }
 }

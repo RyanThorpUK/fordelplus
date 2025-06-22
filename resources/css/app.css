@@ -1,17 +1,25 @@
 @import 'tailwindcss';
 @import '../../vendor/livewire/flux/dist/flux.css';
 
+@utility bg-opacity-25 {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+@import "../../vendor/wire-elements/pro/resources/css/tailwind/overlay-component.css";
+
 @source "../views";
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
 @source '../../vendor/livewire/flux/stubs/**/*.blade.php';
 @source '../../wire-elements/modal/resources/views/*.blade.php';
 @source '../../wire-elements/modal/src/ModalComponent.php';
+@source '../../vendor/wire-elements/pro/config/wire-elements-pro.php';
+@source '../../vendor/wire-elements/pro/**/*.blade.php';
 
-@custom-variant dark (&:where(.dark, .dark *));
+/* @custom-variant dark (&:where(.dark, .dark *)); */
 
 @theme {
-    --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans:  'Manrope', sans-serif;
 
     --color-zinc-50: #fafafa;
     --color-zinc-100: #f5f5f5;
@@ -24,14 +32,30 @@
     --color-zinc-800: #262626;
     --color-zinc-900: #171717;
     --color-zinc-950: #0a0a0a;
-    
-    --color-primary: #154148;
-    --color-accent: #FFCA24;
+
+    --color-grey: #3E3E3E;
+    --color-primary: #0d826e;
+    --color-primary-100: #0c6e5d;
+    --color-primary-200: #154148;
+    --color-primary-400: #092729;
+
+    --color-accent: #3C3530;
     --color-sub-accent: #78FAAE;
     --color-white: #FFFFFF;
     --color-offset-white: #FAFAFC;
-    --color-offset-tan: #E5E2DC;
+    --color-offset-tan: #F6F6F3;
+    --color-offset-tan-400: #F2EFE9;
+    --color-offset-tan-600: #DFD7CB;
+    --color-offset-tan-900: #3C3530;
     --color-black: #000000;
+    /* 
+    --color-g-primary: #0d826e;
+    --color-g-primary-100: #0c6e5d;
+    --color-g-primary-200: #154148;
+
+    --color-g-secondary: #DD803E;
+    --color-g-secondary-200: #c97234; */
+
 
     --color-secondary-50: #fff7ed;
     --color-secondary-100: #ffedd5;
@@ -49,12 +73,34 @@
     --color-accent-foreground: var(--color-white);
 }
 
+@layer utilities {
+    .scrollbar::-webkit-scrollbar {
+        width: 6px;
+        height: 20px;
+    }
+
+    .scrollbar::-webkit-scrollbar-track {
+        border-radius: 100vh;
+        background: #c5c0a9;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb {
+        background: var(--color-offset-tan-600);
+        border-radius: 100vh;
+        /* border: 3px solid var(--color-offset-tan-600); */
+    }
+}
+
+:root.dark {
+    color-scheme: light !important;
+}
+
 @layer theme {
-    .dark {
+    /* .dark {
         --color-accent: var(--color-white);
         --color-accent-content: var(--color-white);
         --color-accent-foreground: var(--color-neutral-800);
-    }
+    } */
 }
 
 @layer base {
@@ -73,7 +119,20 @@
 }
 
 [data-flux-label] {
-    @apply  !mb-0 !leading-tight;
+    @apply !mb-0 !leading-tight;
+}
+
+.wep-slide-over-container-inner {
+    padding-left: 0 !important;
+}
+
+.wep-modal-content,
+.wep-slide-over-container-inner-wrap {
+    @apply motion-reduce:transition-none;
+}
+
+.wep-slide-over-container-inner-content {
+    @apply bg-offset-tan;
 }
 
 input:focus[data-flux-control],
@@ -82,47 +141,98 @@ select:focus[data-flux-control] {
     @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
 }
 
-
-.btn{
-    @apply px-4 py-2 rounded-md cursor-pointer transition-colors ease-in-out duration-300;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    @apply text-primary-400;
 }
 
-.btn--transparent{
+.btn {
+    @apply px-4 py-2 rounded-3xl cursor-pointer transition-colors ease-in-out duration-300;
+}
+
+.btn--transparent {
     @apply px-1 bg-transparent;
 }
 
-.btn--sub-accent{
-    @apply bg-sub-accent text-primary ;
+.btn--sub-accent {
+    @apply bg-sub-accent text-primary;
 }
 
-.btn--sub-accent:hover{
+.btn--sub-accent:hover {
     @apply bg-sub-accent/80;
 }
 
-.btn--primary{
+.btn--primary {
     @apply bg-primary text-white;
 }
-    
-.btn--primary:hover{
+
+.btn--primary:hover {
     @apply bg-primary/80;
 }
 
-.btn--accent{
+.btn--accent {
     @apply bg-accent text-white;
 }
 
-.btn--accent:hover{
+.btn--accent:hover {
     @apply bg-accent/80;
 }
 
-.btn--sub-accent:hover{
+.btn--sub-accent:hover {
     @apply bg-sub-accent/80;
 }
 
-.btn--offset-white{
+.btn--offset-white {
     @apply bg-offset-white text-black;
 }
 
-.btn--offset-white:hover{
+.btn--offset-white:hover {
     @apply bg-offset-white/80;
+}
+
+.btn--outline {
+    @apply bg-transparent border-2 border-primary-400 text-primary-400;
+}
+
+.btn--outline:hover {
+    @apply bg-primary-400 text-white;
+}
+
+/* .btn--g-primary{
+    @apply bg-g-primary text-white hover:bg-g-primary-100;
+}
+
+.btn--g-alt{
+    @apply bg-[#f6f6f3] text-g-primary hover:bg-[#edede8];
+} */
+
+#flag {
+    width: 110px;
+    height: 56px;
+    box-sizing: content-box;
+    padding-top: 15px;
+    position: relative;
+    background: red;
+    color: white;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#flag:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 13px solid #eee;
+    border-left: 55px solid transparent;
+    border-right: 55px solid transparent;
 }

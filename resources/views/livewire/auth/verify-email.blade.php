@@ -12,13 +12,13 @@
     </flux:text>
 
     @if (session('status') == 'verification-link-sent')
-        <flux:text class="text-center font-medium !dark:text-green-400 !text-green-600">
+        <flux:text class="text-center font-medium !text-green-600">
             {{ __('Et nyt bekræftelseslink er blevet sendt til den e-mailadresse, du angav under registreringen.') }}
         </flux:text>
     @endif
 
     <div class="flex flex-col items-center justify-between space-y-3">
-        <button wire:click="sendVerification" variant="primary" class="w-full btn btn--sub-accent">
+        <button wire:click="sendVerification" variant="primary" class="w-full btn btn--primary">
             {{ __('Send bekræftelsesmail igen') }}
         </button>
 

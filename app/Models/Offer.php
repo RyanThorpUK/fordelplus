@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Scopes\OfferTypeScope;
+use App\Models\Scopes\BlacklistScope;
 use App\Models\Concerns\HasUlid;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
@@ -27,7 +28,9 @@ class Offer extends Model
         'quantity',
         'company_id',
         'category_id',
-        'image'
+        'image',
+        'highlight',
+        'highlight_type'
     ];
 
     protected $casts = [
@@ -39,6 +42,7 @@ class Offer extends Model
     protected static function booted()
     {
         static::addGlobalScope(new OfferTypeScope);
+        static::addGlobalScope(new BlacklistScope);
     }
 
     public function getRouteKeyName()
@@ -77,4 +81,37 @@ class Offer extends Model
 
         return $list;
     }
+
+
+
+    // public function scopeWithUserType($query, $user = null)
+    // {
+    //     // Get the current user if not provided
+    //     if (!$user) {
+    //         $user = request()->user();
+    //     }
+        
+    //     // If no user, return query as-is (show all)
+    //     if (!$user || !$user->type) {
+    //         return $query;
+    //     }
+        
+    //     // Filter offers for the user's current type
+    //     return $query->where('user_type', $user->type);
+    // }
+
+    // public function scopeActive($query)
+    // {
+    //     return $query->where('start_date', '<=', now())
+    //         ->where('end_date', '>=', now());
+    // }
+
+    // public function scopeForCategory($query, $categoryId)
+    // {
+    //     if (!$categoryId) {
+    //         return $query;
+    //     }
+        
+    //     return $query->where('category_id', $categoryId);
+    // }
 }

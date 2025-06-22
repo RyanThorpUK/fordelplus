@@ -98,6 +98,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             \App\Nova\Company::class,
             \App\Nova\Offer::class,
             \App\Nova\OfferCategory::class,
+            \App\Nova\Type::class,
         ]);
     }
 }

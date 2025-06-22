@@ -10,9 +10,13 @@ use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\MultiSelect;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Illuminate\Validation\Rules;
 use Spatie\Permission\Models\Role;
+use Laravel\Nova\Fields\BelongsToMany;
+use App\Models\Type;
+use App\Models\UserType;
 
 class User extends Resource
 {
@@ -87,6 +91,52 @@ class User extends Resource
                 ->resolveUsing(function ($value, $model) {
                     // Show the first assigned role
                     return $model->roles->pluck('name')->first();
+                }),
+            
+            MultiSelect::make('Allowed Types', 'user_types')
+                ->options(Type::pluck('name', 'id')->toArray())
+                ->rules('required')
+                ->displayUsingLabels()
+                ->fillUsing(function ($request, $model, $attribute, $requestAttribute) {
+                    if ($request->filled($requestAttribute)) {
+                        $values = $request->input($requestAttribute);
+                        
+                        if (is_string($values)) {
+                            $values = json_decode($values, true);
+                        }
+                        
+                        $model->types()->sync($values);
+                    }
+                })
+                ->resolveUsing(function ($value, $model) {
+                    return $model->types->pluck('id')->toArray();
+                }),
+
+            Select::make('Current Type', 'type')
+                ->options(function () {
+                    return Type::pluck('name', 'id')->toArray();
+                })
+                ->dependsOn(
+                    ['user_types'],
+                    function (Select $field, NovaRequest $request, $formData) {
+                        if (!empty($formData->user_types)) {
+                            $typeIds = is_string($formData->user_types) ? json_decode($formData->user_types, true) : $formData->user_types;
+                            if (is_array($typeIds)) {
+                                $types = Type::whereIn('id', $typeIds)->pluck('name', 'id')->toArray();
+                                $field->options($types);
+                            }
+                        }
+                    }
+                )
+                ->rules('required')
+                ->displayUsingLabels()
+                ->fillUsing(function ($request, $model, $attribute, $requestAttribute) {
+                    if ($request->filled($requestAttribute)) {
+                        $model->type = $request->input($requestAttribute);
+                    }
+                })
+                ->resolveUsing(function ($value, $model) {
+                    return $model->type;
                 }),
 
             Text::make('Company Name', function() {

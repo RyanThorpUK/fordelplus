@@ -1,4 +1,5 @@
 import CopyToClipboard from '../untils/copyToClipboard';
+import delegate from '../untils/delegate';
 
 class Offer {
 
@@ -7,20 +8,21 @@ class Offer {
     }
 
     addEvents() {
+        delegate(document, 'click', '.js--offer-reveal', (e) => {
+            e.currentTarget.classList.add('hidden');
+            document.querySelector('.js--offer-code').classList.remove('hidden');
+        });
 
-        if ( document.querySelector('.js--offer-reveal') ) {
-            document.querySelector('.js--offer-reveal').addEventListener('click', (e) => {
-                e.currentTarget.classList.add('hidden');
-                document.querySelector('.js--offer-code').classList.remove('hidden');
-            });
-        }
+        delegate(document, 'click', '.js--offer-code-btn', (e) => {
+            let value = e.currentTarget.querySelector('.js--offer-code-value').innerText;
+            new CopyToClipboard(value);
 
-        if ( document.querySelector('.js--offer-code') ) {
-            document.querySelector('.js--offer-code-btn').addEventListener('click', (e) => {
-                let value = e.currentTarget.querySelector('.js--offer-code-value').innerText;
-                new CopyToClipboard(value);
-            });
-        }
+            let notification = e.currentTarget.querySelector('.js--offer-code-copied');
+            notification.classList.remove('hidden', 'opacity-1');
+            setTimeout(() => {
+                notification.classList.add('opacity-1');
+            }, 1000);
+        });
     }
 }
 

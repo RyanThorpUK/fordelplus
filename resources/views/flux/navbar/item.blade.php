@@ -22,26 +22,30 @@ $square ??= $slot->isEmpty();
 // Size-up icons in square/icon-only buttons...
 $iconClasses = Flux::classes($square ? 'size-6' : 'size-5');
 
+$textClasses = request()->user() && request()->user()->type == 1 ? 'text-primary-400' : 'text-[#3E3E3E]';
+$textHoverClasses = request()->user() && request()->user()->type == 1 ? 'hover:text-primary-400' : 'hover:text-[#3E3E3E]';
+$textCurrentClasses = request()->user() && request()->user()->type == 1 ? 'data-current:text-primary-400' : 'data-current:hover:text-[#3E3E3E]';
+
 $classes = Flux::classes()
-    ->add('px-3 h-8 flex items-center rounded-lg')
+    ->add('md:px-2.5! h-8 flex items-center rounded-lg')
     ->add('relative') // This is here for the "active" bar at the bottom to be positioned correctly...
-    ->add($square ? '' : 'px-2.5!')
-    ->add('text-white')
+    ->add($square)
+    ->add($textClasses)
     // Styles for when this link is the "current" one...
-    ->add('data-current:after:absolute data-current:after:-bottom-3 data-current:after:inset-x-0 data-current:after:h-[2px]')
+    ->add('data-current:after:absolute data-current:after:-bottom-6 data-current:after:inset-x-0 data-current:after:h-[3px]')
     ->add([
         '[--hover-fill:color-mix(in_oklab,_var(--color-accent-content),_transparent_90%)]',
 
     ])
     ->add(match ($accent) {
         true => [
-            'data-current:text-white hover:data-current:text-sub-accent',
-            'data-current:after:bg-(--color-sub-accent)',
+            $textCurrentClasses,
+            'data-current:after:bg-(--color-primary)',
         ],
         false => [
-            'hover:text-sub-accent',
-            'data-current:text-sub-accent dark:data-current:text-zinc-100',
-            'data-current:after:bg-sub-accent dark:data-current:after:bg-white',
+            'hover:text-primary',
+            'data-current:text-primary',
+            'data-current:after:bg-primary',
         ],
     })
     ;
@@ -58,14 +62,14 @@ $classes = Flux::classes()
 
             <?php if ($iconDot): ?>
                 <div class="absolute top-[-2px] end-[-2px]">
-                    <div class="size-[6px] rounded-full bg-zinc-500 dark:bg-zinc-400"></div>
+                    <div class="size-[6px] rounded-full bg-zinc-500"></div>
                 </div>
             <?php endif; ?>
         </div>
     <?php endif; ?>
 
     <?php if ($slot->isNotEmpty()): ?>
-        <div class="{{ $icon ? 'ms-3' : '' }} flex-1 text-sm font-medium leading-none whitespace-nowrap [[data-nav-footer]_&]:hidden [[data-nav-sidebar]_[data-nav-footer]_&]:block" data-content>{{ $slot }}</div>
+        <div class="{{ $icon ? 'ms-3' : '' }} flex-1 flex items-center md:gap-2 text-sm font-medium leading-none whitespace-nowrap [[data-nav-footer]_&]:hidden [[data-nav-sidebar]_[data-nav-footer]_&]:block" data-content>{{ $slot }}</div>
     <?php endif; ?>
 
     <?php if (is_string($iconTrailing) && $iconTrailing !== ''): ?>

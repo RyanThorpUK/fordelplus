@@ -2,11 +2,11 @@
         
     <div class="flex justify-between items-center relative  mb-6">
         <div class="flex items-center gap-2">
-            <h1 class="text-3xl font-extrabold">Alle tilbud</h1>
+            <h1 class="text-3xl font-semibold">Alle tilbud</h1>
         </div>
 
         <div class="">
-            <button class="btn btn--sub-accent" wire:click="$dispatch('openModal', { component: 'modal-edit-offers' })">
+            <button class="btn btn---primary !rounded-lg" wire:click="$dispatch('openModal', { component: 'modal-edit-offers' })">
                 Tilføj nyt tilbud
             </button>
         </div>
@@ -34,7 +34,7 @@
                     @foreach($offers as $index => $offer)
                         <div class="bg-white px-2 py-4 shadow-sm rounded-md grid grid-cols-4 w-full items-center">
                             <div class="px-2 flex items-center gap-x-2">
-                                <img src="{{ Storage::url($offer->image) }}" alt="{{ $offer->name }}" class="w-10 h-10 rounded-md">
+                                <img src="{{ Storage::url($offer->image) }}" alt="{{ $offer->name }}" class="w-10 h-10 rounded-md object-cover">
                                 <span class="font-semibold">{{ $offer->name }}</span>
                             </div>
                             <div class="flex items-center px-2">
@@ -44,7 +44,7 @@
                                 <span>{{ $offer->end_date->format('d/m/Y') }}</span>
                             </div>
                             <div class="flex items-center justify-end gap-x-4 px-2 text-sm">
-                                <button class="text-sub-accent flex flex-wrap items-center no-underline cursor-pointer" wire:click="$dispatch('openModal', { component: 'modal-edit-offers',  arguments: {
+                                <button class="text-secondary hover:text-secondary-200 transition-colors duration-300 flex flex-wrap items-center no-underline cursor-pointer" wire:click="$dispatch('openModal', { component: 'modal-edit-offers',  arguments: {
                                     offer_ulid: '{{ $offer->ulid }}'
                                 } })">
                                     Rediger

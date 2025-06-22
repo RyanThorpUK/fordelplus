@@ -19,7 +19,7 @@ class VerifyEmailController extends Controller
         $company = $user->company;
         
         if ($user->hasVerifiedEmail()) {
-            return redirect()->intended(route('company', ['company_ulid' => $company->ulid]).'?verified=1');
+            return redirect()->intended(route('home').'?verified=1');
         }
 
         if ($request->user()->markEmailAsVerified()) {
@@ -29,6 +29,6 @@ class VerifyEmailController extends Controller
             event(new Verified($user));
         }
 
-        return redirect()->intended(route('company', ['company_ulid' => $company->ulid]).'?verified=1');
+        return redirect()->intended(route('company.show', ['company_ulid' => $company->ulid]).'?verified=1');
     }
 }

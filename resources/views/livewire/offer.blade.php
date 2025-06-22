@@ -14,7 +14,7 @@
                             </svg>
                         </button>
                         <div class="rounded-tr-3xl rounded-tl-3xl overflow-hidden h-40 sm:h-48">
-                            <img src="{{ Storage::url($offer->image) }}" alt="" class="w-full h-full object-cover object-center" />
+                            <img src="{{ Storage::url($offer->image) }}" alt="" class="w-full h-full object-contain object-center" />
                         </div>
                     </div>
                     <div class="p-6 flex flex-col gap-2">
@@ -90,7 +90,7 @@
                 <div class="order-1 flex  items-center gap-4 mb-12 md:mb-0 md:order-2 gap-4 mt-4 sm:mt-8 ">
 
                     <div class="bg-white w-32 h-32 flex-shrink-0 shadow-lg md:border-3 border-white overflow-hidden rounded-xl">
-                        <a href="{{ route('company', $offer->company->ulid) }}" class="relative z-10">
+                        <a href="{{ route('company.show', $offer->company->ulid) }}" class="relative z-10">
                             <img src="{{ Storage::url($offer->company->logo) }}" alt="" class="w-full h-full object-contain object-center">
                         </a>
                     </div>
@@ -111,7 +111,7 @@
                         </p>
                     </div>
                     <div class="order-1 md:order-2 mt-6 sm:mt-8 w-full  md:w-auto">
-                        <a href="{{ route('company', $offer->company->ulid) }}" class="flex w-full text-center flex-wrap items-center bg-primary rounded-lg gap-1 text-sm text-white block py-2 pl-4 pr-12 hover:bg-primary/80 transition-colors ease-in-out duration-300 ">
+                        <a href="{{ route('company.show', $offer->company->ulid) }}" class="flex w-full text-center flex-wrap items-center bg-primary rounded-lg gap-1 text-sm text-white block py-2 pl-4 pr-12 hover:bg-primary/80 transition-colors ease-in-out duration-300 ">
                             <svg class="mr-6" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                             Gå til virksomhedsside
                         </a>

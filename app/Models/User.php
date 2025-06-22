@@ -116,6 +116,21 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Offer::class, 'favourites');
     }
 
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
+    public function types()
+    {
+        return $this->belongsToMany(Type::class, 'user_types', 'user_id', 'type_id');
+    }
+
+    public function userTypes()
+    {
+        return $this->hasMany(UserType::class);
+    }
+
     public function hasFavourited(Offer $offer)
     {
         return $this->favourites()->where('offer_id', $offer->id)->exists();
@@ -126,3 +141,5 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->notify(new \App\Notifications\VerifyEmail);
     }
 }
+
+

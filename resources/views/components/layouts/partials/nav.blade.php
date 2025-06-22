@@ -1,31 +1,96 @@
-<flux:header container class="bg-white py-2 px-4">
-    <div class="flex items-center w-full">
-        <a href="/" class="mr-3 flex items-center space-x-2 lg:ml-0 -mt-2" wire:navigate>
-            <div class="grid flex-1 text-left text-2xl sm:text-3xl">
-                <img src="/img/fordelplus-logo.svg" alt="FordelPlus" class="h-10">
-                <span class="text-white bg-primary">{{ request()->user()->type }}</span>
-            </div>
-        </a>
+<div class="relative">
+    @if (auth()->user()->company->white_label_enabled)
+    <div class="bg-black w-full h-10">
+        <div class="w-full h-full flex max-w-screen-2xl mx-auto flex items-center justify-center">
+            <p class="!text-white text-center text-sm">
+                I samarbejde med FordelPlus
+            </p>
+        </div>
+    </div>
+    @endif
+    <flux:header container class=" flex items-center">
+        <div class="grid grid-cols-2 lg:flex items-center justify-between w-full px-4">
+            <a href="{{ route('home') }}" class="mr-3 flex items-center space-x-2 lg:ml-0">
+                <div class="relative">
+                    @if (auth()->user()->company->white_label_enabled)
+                    <img src="{{ asset('storage/logos/' . auth()->user()->company->logo) }}" alt="Logo"
+                        class="h-6 lg:h-10">
+                    @else
+                    <svg class="h-6 lg:h-10" viewBox="0 0 181 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M147.352 43.4802C145.176 43.4802 143.416 42.9896 142.072 42.0082C140.739 41.0162 139.928 39.6189 139.64 37.8162L144.088 37.1442C144.269 37.9549 144.669 38.5896 145.288 39.0482C145.917 39.5069 146.712 39.7362 147.672 39.7362C148.461 39.7362 149.069 39.5869 149.496 39.2882C149.923 38.9789 150.136 38.5522 150.136 38.0082C150.136 37.6669 150.051 37.3949 149.88 37.1922C149.709 36.9789 149.325 36.7709 148.728 36.5682C148.141 36.3656 147.224 36.0989 145.976 35.7682C144.568 35.4056 143.443 35.0002 142.6 34.5522C141.757 34.1042 141.149 33.5709 140.776 32.9522C140.403 32.3229 140.216 31.5656 140.216 30.6802C140.216 29.5709 140.499 28.6109 141.064 27.8002C141.629 26.9789 142.424 26.3496 143.448 25.9122C144.483 25.4642 145.699 25.2402 147.096 25.2402C148.451 25.2402 149.651 25.4482 150.696 25.8642C151.741 26.2802 152.584 26.8722 153.224 27.6402C153.875 28.4082 154.275 29.3149 154.424 30.3602L149.976 31.1602C149.901 30.5202 149.624 30.0136 149.144 29.6402C148.664 29.2669 148.013 29.0482 147.192 28.9842C146.392 28.9309 145.747 29.0376 145.256 29.3042C144.776 29.5709 144.536 29.9549 144.536 30.4562C144.536 30.7549 144.637 31.0056 144.84 31.2082C145.053 31.4109 145.485 31.6189 146.136 31.8322C146.797 32.0456 147.8 32.3229 149.144 32.6642C150.456 33.0056 151.507 33.4056 152.296 33.8642C153.096 34.3122 153.677 34.8562 154.04 35.4962C154.403 36.1256 154.584 36.8882 154.584 37.7842C154.584 39.5549 153.944 40.9469 152.664 41.9602C151.384 42.9736 149.613 43.4802 147.352 43.4802Z"
+                            fill="#092729" />
+                        <path
+                            d="M127.648 43.5117C126.294 43.5117 125.19 43.2824 124.336 42.8237C123.483 42.3651 122.816 41.7837 122.336 41.0797C121.867 40.3757 121.531 39.6451 121.328 38.8877C121.126 38.1197 121.003 37.4211 120.96 36.7917C120.918 36.1624 120.896 35.7037 120.896 35.4157V25.7197H125.312V33.8797C125.312 34.2744 125.334 34.7811 125.376 35.3997C125.419 36.0077 125.552 36.6211 125.776 37.2397C126 37.8584 126.363 38.3757 126.864 38.7917C127.376 39.2077 128.096 39.4157 129.024 39.4157C129.398 39.4157 129.798 39.3571 130.224 39.2397C130.651 39.1224 131.051 38.8984 131.424 38.5677C131.798 38.2264 132.102 37.7304 132.336 37.0797C132.582 36.4184 132.704 35.5544 132.704 34.4877L135.2 35.6717C135.2 37.0371 134.923 38.3171 134.368 39.5117C133.814 40.7064 132.976 41.6717 131.856 42.4077C130.747 43.1437 129.344 43.5117 127.648 43.5117ZM133.248 42.9997V37.2717H132.704V25.7197H137.088V42.9997H133.248Z"
+                            fill="#092729" />
+                        <path d="M113.027 43.0005V19.4805H117.379V43.0005H113.027Z" fill="#092729" />
+                        <path
+                            d="M92.855 43V19.96H102.583C102.807 19.96 103.106 19.9706 103.479 19.992C103.863 20.0026 104.204 20.0346 104.503 20.088C105.879 20.3013 107.004 20.7546 107.879 21.448C108.764 22.1413 109.415 23.016 109.831 24.072C110.247 25.1173 110.455 26.2853 110.455 27.576C110.455 28.8666 110.242 30.04 109.815 31.096C109.399 32.1413 108.748 33.0106 107.863 33.704C106.988 34.3973 105.868 34.8506 104.503 35.064C104.204 35.1066 103.863 35.1386 103.479 35.16C103.095 35.1813 102.796 35.192 102.583 35.192H97.207V43H92.855ZM97.207 31.128H102.391C102.615 31.128 102.86 31.1173 103.127 31.096C103.394 31.0746 103.639 31.032 103.863 30.968C104.45 30.808 104.903 30.5413 105.223 30.168C105.543 29.784 105.762 29.3626 105.879 28.904C106.007 28.4346 106.071 27.992 106.071 27.576C106.071 27.16 106.007 26.7226 105.879 26.264C105.762 25.7946 105.543 25.3733 105.223 25C104.903 24.616 104.45 24.344 103.863 24.184C103.639 24.12 103.394 24.0773 103.127 24.056C102.86 24.0346 102.615 24.024 102.391 24.024H97.207V31.128Z"
+                            fill="#092729" />
+                        <path d="M84.666 43.0005V19.4805H89.018V43.0005H84.666Z" fill="#092729" />
+                        <path
+                            d="M73.8694 43.4802C72.0988 43.4802 70.5361 43.1016 69.1814 42.3442C67.8374 41.5762 66.7814 40.5256 66.0134 39.1922C65.2561 37.8482 64.8774 36.3122 64.8774 34.5842C64.8774 32.6962 65.2508 31.0536 65.9974 29.6562C66.7441 28.2589 67.7734 27.1762 69.0854 26.4082C70.3974 25.6296 71.9068 25.2402 73.6134 25.2402C75.4268 25.2402 76.9681 25.6669 78.2374 26.5202C79.5068 27.3736 80.4454 28.5736 81.0534 30.1202C81.6614 31.6669 81.8748 33.4856 81.6934 35.5762H77.3894V33.9762C77.3894 32.2162 77.1068 30.9522 76.5414 30.1842C75.9868 29.4056 75.0748 29.0162 73.8054 29.0162C72.3228 29.0162 71.2294 29.4696 70.5254 30.3762C69.8321 31.2722 69.4854 32.6002 69.4854 34.3602C69.4854 35.9709 69.8321 37.2189 70.5254 38.1042C71.2294 38.9789 72.2588 39.4162 73.6134 39.4162C74.4668 39.4162 75.1974 39.2296 75.8054 38.8562C76.4134 38.4829 76.8774 37.9442 77.1974 37.2402L81.5494 38.4882C80.8988 40.0669 79.8694 41.2936 78.4614 42.1682C77.0641 43.0429 75.5334 43.4802 73.8694 43.4802ZM68.1414 35.5762V32.3442H79.5974V35.5762H68.1414Z"
+                            fill="#092729" />
+                        <path
+                            d="M53.8054 43.48C52.2161 43.48 50.8241 43.08 49.6294 42.28C48.4347 41.48 47.5014 40.392 46.8294 39.016C46.1681 37.64 45.8374 36.088 45.8374 34.36C45.8374 32.6 46.1734 31.0373 46.8454 29.672C47.5281 28.296 48.4827 27.2133 49.7094 26.424C50.9361 25.6346 52.3761 25.24 54.0294 25.24C55.6721 25.24 57.0534 25.64 58.1734 26.44C59.2934 27.24 60.1414 28.328 60.7174 29.704C61.2934 31.08 61.5814 32.632 61.5814 34.36C61.5814 36.088 61.2881 37.64 60.7014 39.016C60.1254 40.392 59.2614 41.48 58.1094 42.28C56.9574 43.08 55.5227 43.48 53.8054 43.48ZM54.5094 39.608C55.4801 39.608 56.2534 39.3893 56.8294 38.952C57.4161 38.5146 57.8374 37.9013 58.0934 37.112C58.3494 36.3226 58.4774 35.4053 58.4774 34.36C58.4774 33.3146 58.3494 32.3973 58.0934 31.608C57.8374 30.8186 57.4267 30.2053 56.8614 29.768C56.3067 29.3306 55.5761 29.112 54.6694 29.112C53.6987 29.112 52.8987 29.352 52.2694 29.832C51.6507 30.3013 51.1921 30.936 50.8934 31.736C50.5947 32.5253 50.4454 33.4 50.4454 34.36C50.4454 35.3306 50.5894 36.216 50.8774 37.016C51.1654 37.8053 51.6081 38.4346 52.2054 38.904C52.8027 39.3733 53.5707 39.608 54.5094 39.608ZM58.4774 43V31.16H57.9334V19.96H62.3174V43H58.4774Z"
+                            fill="#092729" />
+                        <path
+                            d="M34.8823 42.9997V25.7197H38.7223V29.9437L38.3063 29.3997C38.5303 28.8024 38.829 28.2584 39.2023 27.7677C39.5757 27.277 40.0343 26.8717 40.5783 26.5517C40.9943 26.2957 41.4477 26.0984 41.9383 25.9597C42.429 25.8104 42.9357 25.7197 43.4583 25.6877C43.981 25.645 44.5037 25.6557 45.0263 25.7197V29.7837C44.5463 29.6344 43.9863 29.5864 43.3463 29.6397C42.717 29.6824 42.1463 29.8264 41.6343 30.0717C41.1223 30.3064 40.6903 30.621 40.3383 31.0157C39.9863 31.3997 39.7197 31.8584 39.5383 32.3917C39.357 32.9144 39.2663 33.5064 39.2663 34.1677V42.9997H34.8823Z"
+                            fill="#092729" />
+                        <path
+                            d="M23.5558 43.4802C21.8172 43.4802 20.2918 43.0909 18.9798 42.3122C17.6678 41.5336 16.6438 40.4616 15.9078 39.0962C15.1825 37.7202 14.8198 36.1416 14.8198 34.3602C14.8198 32.5576 15.1932 30.9736 15.9398 29.6082C16.6865 28.2322 17.7158 27.1602 19.0278 26.3922C20.3398 25.6242 21.8492 25.2402 23.5558 25.2402C25.2945 25.2402 26.8198 25.6296 28.1318 26.4082C29.4545 27.1869 30.4838 28.2642 31.2198 29.6402C31.9558 31.0056 32.3238 32.5789 32.3238 34.3602C32.3238 36.1522 31.9505 37.7362 31.2038 39.1122C30.4678 40.4776 29.4385 41.5496 28.1158 42.3282C26.8038 43.0962 25.2838 43.4802 23.5558 43.4802ZM23.5558 39.4162C24.9532 39.4162 25.9932 38.9469 26.6758 38.0082C27.3692 37.0589 27.7158 35.8429 27.7158 34.3602C27.7158 32.8242 27.3638 31.5976 26.6598 30.6802C25.9665 29.7629 24.9318 29.3042 23.5558 29.3042C22.6065 29.3042 21.8278 29.5176 21.2198 29.9442C20.6118 30.3709 20.1585 30.9629 19.8598 31.7202C19.5718 32.4776 19.4278 33.3576 19.4278 34.3602C19.4278 35.9069 19.7745 37.1389 20.4678 38.0562C21.1718 38.9629 22.2012 39.4162 23.5558 39.4162Z"
+                            fill="#092729" />
+                        <path d="M0.240234 43V19.96H14.3202V24.312H4.59223V29.304H12.4002V33.656H4.59223V43H0.240234Z"
+                            fill="#092729" />
+                        <path
+                            d="M159.62 10.4814L159.597 10.7459C159.488 12.3501 160.172 13.6496 161.655 14.3108C162 14.4661 162.938 14.4603 162.846 14.8916C159.327 18.9222 154.462 21.4003 149 21.0726V10.4814H159.626H159.62Z"
+                            fill="#0D826E" />
+                        <path d="M170.102 0H159.62V10.4819H170.102V0Z" fill="#0D826E" />
+                        <path d="M180.584 10.4814H170.103V20.9634H180.584V10.4814Z" fill="#0D826E" />
+                        <path
+                            d="M170.102 20.9634L169.837 20.9864C168.233 21.0957 166.933 20.4114 166.272 18.928C166.117 18.583 166.123 17.6458 165.691 17.7378C161.661 21.2567 159.183 26.121 159.51 31.5833H170.102V20.9577V20.9634Z"
+                            fill="#0D826E" />
+                    </svg>
+                    @if (request()->user())
+                    <span
+                        class="text-primary-200 font-semibold border-primary border-l-1 absolute top-2 left-full pl-3 ml-3 text-base">{{
+                        request()->user()->type == 1 ? 'Erhverv' : 'Privat' }}</span>
+                    @endif
+                    @endif
+                </div>
+            </a>
 
-        <!-- Desktop Navigation -->
-        <flux:navbar class="ml-auto max-lg:hidden -mb-px mr-6">
-            @if ( auth()->user() )
-                <flux:navbar.item :href="route('home')">
-                    {{ __('Markedsplads') }}
-                </flux:navbar.item>
-                <flux:navbar.item :href="route('companies')">
-                    {{ __('Firmaer') }}
-                </flux:navbar.item>
-                <flux:navbar.item :href="route('profile')">
-                    {{ __('Min side') }}
-                </flux:navbar.item>
+            <!-- Desktop Navigation -->
+            <flux:navbar class="justify-between col-span-2 lg:col-span-1 -mb-px lg:mr-6 order-last lg:order-none">
+                @if ( auth()->user() )
+                <flux:navbar.item :href="route('home')" class="flex items-center lg:gap-2">
+                    <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 0C13.6875 0 15.1875 0.984375 15.9375 2.4375C17.4844 1.92188 19.2656 2.29688 20.4844 3.51562C21.7031 4.73438 22.0781 6.51562 21.5625 8.0625C23.0156 8.8125 24 10.3125 24 12C24 13.7344 23.0156 15.2344 21.5625 15.9844C22.0781 17.5312 21.7031 19.2656 20.4844 20.4844C19.2656 21.7031 17.4844 22.0781 15.9375 21.6094C15.1875 23.0625 13.6875 24 12 24C10.2656 24 8.76562 23.0625 8.01562 21.6094C6.46875 22.0781 4.73438 21.7031 3.51562 20.4844C2.29688 19.2656 1.92188 17.5312 2.39062 15.9844C0.9375 15.2344 0 13.7344 0 12C0 10.3125 0.9375 8.8125 2.39062 8.0625C1.92188 6.51562 2.29688 4.73438 3.51562 3.51562C4.73438 2.29688 6.46875 1.92188 8.01562 2.4375C8.76562 0.984375 10.2656 0 12 0ZM9 10.5C9.79688 10.5 10.5 9.84375 10.5 9C10.5 8.20312 9.79688 7.5 9 7.5C8.15625 7.5 7.5 8.20312 7.5 9C7.5 9.84375 8.15625 10.5 9 10.5ZM16.5 15C16.5 14.2031 15.7969 13.5 15 13.5C14.1562 13.5 13.5 14.2031 13.5 15C13.5 15.8438 14.1562 16.5 15 16.5C15.7969 16.5 16.5 15.8438 16.5 15ZM15.7969 9.79688C16.2188 9.375 16.2188 8.67188 15.7969 8.25C15.3281 7.78125 14.625 7.78125 14.2031 8.25L8.20312 14.2031C7.73438 14.6719 7.73438 15.375 8.20312 15.7969C8.625 16.2656 9.32812 16.2656 9.75 15.7969L15.7969 9.79688Z"
+                            fill="#0D826E" />
+                    </svg>
 
-                @if (auth()->user()->hasRole('manager') || auth()->user()->hasRole('admin'))
-                    <flux:navbar.item :href="route('admin.all-offers')">
-                        {{ __('Admin') }}
-                    </flux:navbar.item>
-                @endif
-            @else 
+                    {{ __('Fordele') }}
+                </flux:navbar.item>
+                <flux:navbar.item :href="route('favourites')" class="flex items-center lg:gap-2">
+                    <svg class="w-6 h-6 mr-2" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10.5469 20.9844L10.4531 20.8438L2.25 13.25C0.796875 11.8906 0 10.0156 0 8.04688V7.90625C0 4.625 2.34375 1.76562 5.57812 1.15625C7.40625 0.78125 9.28125 1.20312 10.8281 2.28125C11.25 2.5625 11.625 2.9375 12 3.3125C12.1875 3.125 12.375 2.89062 12.6094 2.70312C12.7969 2.5625 12.9844 2.42188 13.1719 2.28125C14.6719 1.20312 16.5469 0.78125 18.375 1.15625C21.6562 1.76562 24 4.625 24 7.90625V8.04688C24 10.0156 23.1562 11.8906 21.7031 13.25L13.5 20.8438L13.4062 20.9844C13.0312 21.3125 12.5156 21.5469 12 21.5469C11.4375 21.5469 10.9688 21.3125 10.5469 20.9844ZM11.2031 5.79688C11.1562 5.79688 11.1562 5.79688 11.1562 5.75L10.3125 4.8125C9.23438 3.59375 7.59375 3.07812 6 3.35938C3.79688 3.78125 2.25 5.70312 2.25 7.90625V8.04688C2.25 9.40625 2.76562 10.6719 3.75 11.5625L12 19.2031L20.2031 11.5625C21.1875 10.6719 21.75 9.40625 21.75 8.04688V7.90625C21.75 5.70312 20.1562 3.78125 17.9531 3.35938C16.3594 3.07812 14.7188 3.59375 13.6406 4.8125L12.7969 5.75C12.7969 5.79688 12.7969 5.79688 12.75 5.84375C12.5625 6.03125 12.2812 6.17188 12 6.17188C11.6719 6.17188 11.3906 6.03125 11.2031 5.84375V5.79688Z"
+                            fill="#092729" />
+                    </svg>
+
+                    {{ __('Favoritter') }}
+                </flux:navbar.item>
+                <flux:navbar.item :href="route('coming-soon')" class="flex items-center lg:gap-2">
+                    <svg class="w-6 h-6 mr-2" viewBox="0 0 27 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M11.625 14.5312C12.2812 15.2344 12.8438 15.5625 13.2188 15.6562C13.3125 15.7031 13.4062 15.75 13.5 15.75C13.5469 15.75 13.6406 15.7031 13.7812 15.6562C14.1094 15.5625 14.6719 15.2344 15.3281 14.5312C16.5938 13.125 18.375 9.79688 18.7031 2.25H8.29688C8.57812 9.79688 10.3594 13.125 11.625 14.5312ZM18.75 0C19.9688 0 21 1.03125 20.9531 2.29688C20.9062 2.53125 20.9062 2.76562 20.9062 3H25.875C26.4844 3 27 3.51562 27 4.125C27 9.23438 24.8438 12.4688 22.2188 14.4844C19.6875 16.4531 16.7812 17.2031 15.2344 17.4844C15 17.5781 14.8125 17.6719 14.625 17.7656V21.75H18.375C18.9844 21.75 19.5 22.2656 19.5 22.875C19.5 23.5312 18.9844 24 18.375 24H13.5H8.625C7.96875 24 7.5 23.5312 7.5 22.875C7.5 22.2656 7.96875 21.75 8.625 21.75H12.375V17.7656C12.1875 17.6719 11.9531 17.5781 11.7656 17.4844C10.1719 17.2031 7.26562 16.4531 4.73438 14.4844C2.10938 12.4688 0 9.23438 0 4.125C0 3.51562 0.46875 3 1.125 3H6.04688C6.04688 2.76562 6.04688 2.53125 6 2.29688C5.95312 1.03125 6.98438 0 8.25 0H18.75ZM20.7188 5.25C20.2969 9.51562 19.3594 12.3281 18.2812 14.2031C19.125 13.8281 20.0156 13.3594 20.8594 12.7031C22.7344 11.25 24.4219 8.95312 24.7031 5.25H20.7188ZM8.67188 14.2031C7.59375 12.3281 6.65625 9.51562 6.23438 5.25H2.25C2.53125 8.95312 4.21875 11.25 6.09375 12.7031C6.9375 13.3594 7.82812 13.8281 8.67188 14.2031Z"
+                            fill="#092729" />
+                    </svg>
+
+                    {{ __('Konkurrencer') }}
+                </flux:navbar.item>
+                @else
                 <flux:navbar.item :href="'https://fordelplus.dk/'">
                     {{ __('Forside') }}
                 </flux:navbar.item>
@@ -41,110 +106,127 @@
                 <flux:navbar.item :href="'https://fordelplus.dk/kontakt/'">
                     {{ __('Kontakt') }}
                 </flux:navbar.item>
-            @endif
-        </flux:navbar>
+                @endif
+            </flux:navbar>
 
-        @if (auth()->user())
-            <div class="items-center gap-2 sm:gap-4 hidden lg:flex">
-                <form class="relative w-32 sm:w-48" action="{{ route('companies')}}" method="get">
-                    <input 
-                        type="text" 
-                        name="s"
-                        placeholder="Søg..."
-                        class="mt-1 w-full rounded-md bg-[#FAFAFC] border border-[#E3EBF5] p-2 text-xs sm:text-sm" />
-                    <button type="submit" class="absolute right-0 top-1 bottom-0 px-2 sm:px-4 text-sub-accent">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    </button>
-                </form>
+            @if (auth()->user())
+            <div class="flex items-center gap-4 justify-end">
+                @if (auth()->user()->hasRole('manager') || auth()->user()->hasRole('admin'))
+                <a href="{{ route('admin.all-offers') }}"
+                    class="cursor-pointer text-xs sm:text-sm font-medium rounded-3xl px-4 sm:px-6 py-2 flex items-center gap-2 drop-shadow-sm transition-colors duration-300 bg-white border border-gray-300 hover:bg-gray-100 ">
+                    {{ __('Admin') }}
+                </a>
+                @endif
+                <livewire:user-type-selector />
             </div>
-        @else
+            @else
             <div class="hidden lg:flex items-center ml-auto">
-                <a href="{{ route('login') }}" class="text-xs sm:text-sm font-medium text-primary bg-sub-accent rounded-md px-4 sm:px-6 py-2">
+                <a href="{{ route('login') }}"
+                    class="text-xs sm:text-sm font-medium text-primary bg-sub-accent rounded-md px-4 sm:px-6 py-2">
                     {{ __('Login') }}
                 </a>
             </div>
-        @endif
-        
-        <!-- Mobile Menu Button -->
-        <button 
-            type="button" 
-            class="js--toggle-mobile-menu // lg:hidden ml-auto p-2 rounded-md text-white hover:text-primary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
-        >
-            <span class="sr-only">Open menu</span>
-            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-        </button>
-    </div>
+            @endif
 
-    <!-- Mobile Menu Overlay -->
-    <div 
-        class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden transition-opacity duration-300 ease-in-out"
-        data-mobile-overlay
-    ></div>
+            @if(false)
+            <!-- Mobile Menu Button -->
+            <button type="button"
+                class="js--toggle-mobile-menu // lg:hidden ml-auto p-2 rounded-md text-white hover:text-primary focus:outline-none focus:ring-2 focus:ring-inset focus:rin-primary">
+                <span class="sr-only">Open menu</span>
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+            @endif
+        </div>
 
-    <!-- Mobile Menu -->
-    <div 
-        class="fixed inset-y-0 left-0 w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out z-50"
-        data-mobile-menu
-    >
-        <div class="flex flex-col h-full">
-            <div class="flex items-center justify-between p-4 border-b">
-                <h2 class="text-lg font-semibold">Menu</h2>
-                <button 
-                    type="button" 
-                    class="js--toggle-mobile-menu // p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
-                >
-                    <span class="sr-only">Close menu</span>
-                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
+        @if(false)
+        <!-- Mobile Menu Overlay -->
+        <div class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden transition-opacity duration-300 ease-in-out"
+            data-mobile-overlay></div>
 
-            <nav class="flex-1 px-4 py-4 space-y-1 overflow-y-auto">
-                @if ( auth()->user() )
-                    <a href="{{ route('home') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+        <!-- Mobile Menu -->
+        <div class="fixed inset-y-0 left-0 w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out z-50"
+            data-mobile-menu>
+            <div class="flex flex-col h-full">
+                <div class="flex items-center justify-between p-4 border-b">
+                    <h2 class="text-lg font-semibold">Menu</h2>
+                    <button type="button"
+                        class="js--toggle-mobile-menu // p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:rin-primary">
+                        <span class="sr-only">Close menu</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <nav class="flex-1 px-4 py-4 space-y-1 overflow-y-auto">
+                    @if ( auth()->user() )
+                    <a href="{{ route('home') }}"
+                        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
                         {{ __('Markedsplads') }}
                     </a>
-                    <a href="{{ route('companies') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+                    <a href="{{ route('companies') }}"
+                        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
                         {{ __('Firmaer') }}
                     </a>
-                    <a href="{{ route('profile') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+                    <a href="{{ route('profile') }}"
+                        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
                         {{ __('Min side') }}
                     </a>
 
                     @if (auth()->user()->hasRole('manager') || auth()->user()->hasRole('admin'))
-                        <a href="{{ route('admin.all-offers') }}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
-                            {{ __('Admin') }}
-                        </a>
+                    <a href="{{ route('admin.all-offers') }}"
+                        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+                        {{ __('Admin') }}
+                    </a>
                     @endif
-                @else 
-                    <a href="https://fordelplus.dk/" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+                    @else
+                    <a href="https://fordelplus.dk/"
+                        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
                         {{ __('Forside') }}
                     </a>
-                    <a href="https://fordelplus.dk/om-fordelplus/" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+                    <a href="https://fordelplus.dk/om-fordelplus/"
+                        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
                         {{ __('Om FordelPlus') }}
                     </a>
-                    <a href="https://fordelplus.dk/bliv-partner/" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+                    <a href="https://fordelplus.dk/bliv-partner/"
+                        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
                         {{ __('Bliv Partner') }}
                     </a>
-                    <a href="https://fordelplus.dk/medlemmer/" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+                    <a href="https://fordelplus.dk/medlemmer/"
+                        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
                         {{ __('Medlemmer') }}
                     </a>
-                    <a href="https://fordelplus.dk/kontakt/" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
+                    <a href="https://fordelplus.dk/kontakt/"
+                        class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
                         {{ __('Kontakt') }}
                     </a>
-                @endif
-            </nav>
+                    @endif
+                </nav>
 
-            @if (!auth()->user())
+                @if (!auth()->user())
                 <div class="p-4 border-t">
-                    <a href="{{ route('login') }}" class="w-full flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-primary bg-sub-accent hover:bg-opacity-90">
+                    <a href="{{ route('login') }}"
+                        class="w-full flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-primary bg-sub-accent hover:bg-opacity-90">
                         {{ __('Login') }}
                     </a>
                 </div>
-            @endif
+                @endif
+            </div>
         </div>
+        @endif
+    </flux:header>
+
+    @if ( request()->routeIs('company.show') && auth()->user()->company->theme )
+    <div class="bg-gradient-to-b to-white h-64 w-full absolute top-full left-0 opacity-50"
+        style="background-color: {{ auth()->user()->company->theme }};">
     </div>
-</flux:header>
+    @else
+    <div class="bg-gradient-to-t to-offset-tan-400 h-64 w-full absolute top-full left-0 ">
+    </div>
+    @endif
+</div>

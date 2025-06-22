@@ -19,7 +19,7 @@ if ($sticky) {
 
 <header {{ $attributes->class($classes) }} data-flux-header>
     @if ($container)
-        <div class="mx-auto w-full h-full flex max-w-7xl mx-auto">
+        <div class="w-full h-full flex max-w-screen-2xl mx-auto">
             {{ $slot }}
         </div>
     @else

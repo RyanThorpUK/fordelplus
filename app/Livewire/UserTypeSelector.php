@@ -18,6 +18,7 @@ class UserTypeSelector extends Component
        request()->user()->type = $type;
        request()->user()->save();
 
+       $this->skipRender();
        $this->dispatch('refresh-browser');
     }
 

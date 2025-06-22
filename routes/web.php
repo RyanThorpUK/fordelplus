@@ -6,11 +6,13 @@
 
 
 use App\Livewire\Home;
-use App\Livewire\AllOffers;
 use App\Livewire\Offer;
 use App\Livewire\Company;
-use App\Livewire\Companies;
 use App\Livewire\Profile;
+use App\Livewire\Category;
+use App\Livewire\AllOffers;
+use App\Livewire\Companies;
+use App\Livewire\Favourites;
 
 use App\Livewire\Admin\AdminOffer;
 use App\Livewire\Admin\AdminAllOffers;
@@ -30,10 +32,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/', Home::class)->name('home');
     Route::get('/alle-tilbud/{offer_ulid}', Offer::class)->name('offer.show');
-    Route::get('/company/{company_ulid}', Company::class)->name('company');
+    Route::get('/kategori/{category_ulid}', Category::class)->name('category.show');
+    Route::get('/firma/{company_ulid}', Company::class)->name('company.show');
     Route::get('/firmaer', Companies::class)->name('companies');
+    Route::get('/favoritter', Favourites::class)->name('favourites');
+    Route::get('/coming-soon', function () {
+        return view('coming-soon');
+    })->name('coming-soon');
     Route::get('/min-side', Profile::class)->name('profile');
-    
+
     Route::middleware(['role:manager|admin'])->group(function () {
         Route::redirect('admin', 'admin/alle-tilbud');
         Route::group(['prefix' => 'admin'], function () {
@@ -44,7 +51,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('online-profil', AdminOnlineProfil::class)->name('admin.online-profil');
         });
     });
-    
 });
 
 // Email Verification Routes
@@ -57,10 +63,9 @@ Route::middleware(['auth'])->group(function () {
 
     // Handle verification link
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-            dd('asdsd');
         $request->fulfill();
 
-        return redirect()->route('company', ['company' => request()->user()->company_id]);
+        return redirect()->route('home');
     })->middleware(['signed', 'throttle:6,1'])->name('verification.verify');
 
     // Resend verification email
@@ -74,7 +79,7 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
     
 
 // Test email endpoint
@@ -86,4 +91,3 @@ require __DIR__.'/auth.php';
 
 //     Mail::to('ryan@ryanthorp.co.uk')->send($mailable);
 // });
-

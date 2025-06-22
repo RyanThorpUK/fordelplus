@@ -1,0 +1,9 @@
+@layer components {
+  .flag {
+    @apply w-[110px] h-[56px] box-content pt-[15px] relative bg-red-500 text-white text-[11px] tracking-[0.2em] text-center uppercase;
+  }
+  
+  .flag::after {
+    @apply content-[''] absolute left-0 bottom-0 w-0 h-0 border-b-[13px] border-b-gray-200 border-l-[55px] border-l-transparent border-r-[55px] border-r-transparent;
+  }
+} 

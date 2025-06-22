@@ -3,14 +3,14 @@
     <div>
         <div class="flex justify-between items-center relative">
             <div class="flex flex-col md:flex-row  gap-2">
-                <h1 class="text-3xl font-semibold text-primary">Users</h1>
+                <h1 class="text-3xl font-semibold">Users</h1>
     
                 <ul class="flex  gap-6 md:ml-6">
                     <li class="">
-                        <a href="{{ route('admin.users', ['type' => 'employees']) }}" class="cursor-pointer flex rounded-2xl px-4 py-1 sm:px-6 hover:bg-primary hover:text-white transition-colors ease-in-out duration-300 text-xs md:text-base @if($type == 'employees') bg-primary text-white @else text-primary @endif">Medlemmer</a>
+                        <a href="{{ route('admin.users', ['type' => 'employees']) }}" class="cursor-pointer flex rounded-2xl px-4 py-1 sm:px-6 hover:bg-primary-100 hover:text-white transition-colors ease-in-out duration-300 text-xs md:text-base @if($type == 'employees') bg-primary text-white @else text-primary @endif">Medlemmer</a>
                     </li>
                     <li class="">
-                        <a href="{{ route('admin.users', ['type' => 'managers']) }}" class="cursor-pointer flex rounded-2xl px-4 py-1 sm:px-6 hover:bg-primary hover:text-white transition-colors ease-in-out duration-300 text-xs md:text-base @if($type == 'managers') bg-primary text-white @else text-primary @endif">Admins</a>
+                        <a href="{{ route('admin.users', ['type' => 'managers']) }}" class="cursor-pointer flex rounded-2xl px-4 py-1 sm:px-6 hover:bg-primary-100 hover:text-white transition-colors ease-in-out duration-300 text-xs md:text-base @if($type == 'managers') bg-primary text-white @else text-primary @endif">Admins</a>
                     </li>
                 </ul>
             </div>
@@ -67,7 +67,7 @@
                                     </span>
                                 </button>
 
-                                <button class="text-sub-accent flex flex-wrap items-center no-underline cursor-pointer" 
+                                <button class="text-secondary hover:text-secondary-200 transition-colors duration-300 flex flex-wrap items-center no-underline cursor-pointer" 
                                 wire:click="$dispatch('openModal', { component: 'modal-edit-users',  arguments: {
                                     user_ulid: '{{ $user->ulid }}'
                                 } })"

@@ -8,7 +8,11 @@ use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\MultiSelect;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Fields\Color;
 
 class Company extends Resource
 {
@@ -61,8 +65,41 @@ class Company extends Resource
                 ->sortable()
                 ->rules('nullable', 'email', 'max:255'),
 
+            Color::make('Theme')
+                ->sortable()
+                ->rules('nullable', 'max:255'),
+
             Textarea::make('Description')
                 ->rules('nullable'),
+
+            Boolean::make('White Label Enabled', 'white_label_enabled')
+                ->help('When enabled, this company\'s logo will appear in the header instead of the default logo')
+                ->showOnIndex(),
+
+            MultiSelect::make('Blacklisted Companies', 'blacklisted_companies')
+                ->options(function () {
+                    // Get all companies except the current one
+                    $currentId = $this->resource?->id;
+                    return \App\Models\Company::when($currentId, function ($query) use ($currentId) {
+                        return $query->where('id', '!=', $currentId);
+                    })->pluck('name', 'id')->toArray();
+                })
+                ->rules('nullable')
+                ->displayUsingLabels()
+                ->fillUsing(function ($request, $model, $attribute, $requestAttribute) {
+                    if ($request->filled($requestAttribute)) {
+                        $values = $request->input($requestAttribute);
+                        
+                        if (is_string($values)) {
+                            $values = json_decode($values, true);
+                        }
+                        
+                        $model->blacklistedCompanies()->sync($values);
+                    }
+                })
+                ->resolveUsing(function ($value, $model) {
+                    return $model->blacklistedCompanies->pluck('id')->toArray();
+                }),
 
             HasMany::make('Users'),
             HasMany::make('Offers'),

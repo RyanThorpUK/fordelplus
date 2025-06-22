@@ -8,6 +8,7 @@ use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\WithPagination;
+use App\Models\Scopes\OfferTypeScope;
 
 class AdminAllOffers extends Component
 {
@@ -29,7 +30,8 @@ class AdminAllOffers extends Component
     public function render()
     {
 
-        $offers = Offer::where('company_id', auth()->user()->company_id)
+        $offers = Offer::withoutGlobalScope(OfferTypeScope::class)
+            ->where('company_id', auth()->user()->company_id)
             ->orderBy('start_date', 'desc')
             ->paginate(10);
 

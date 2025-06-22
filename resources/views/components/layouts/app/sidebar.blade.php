@@ -1,100 +1,129 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
-    <head>
-        @include('partials.head')
-    </head>
-    <body class="min-h-screen bg-white dark:bg-zinc-800">
-        <flux:sidebar sticky stashable class="bg-primary">
-            <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-            <a href="{{ route('admin.all-offers') }}" class="mr-5 flex items-center space-x-2 py-3" wire:navigate>
-                <div class="grid flex-1 text-left text-3xl border-b border-white pb-4">
-                    <img src="/img/fordelplus_logo_2.svg" alt="FordelPlus" class="h-7">
-                </div>
-            </a>
+<head>
+    @include('partials.head')
+</head>
 
-            <flux:navlist variant="outline">
-                {{-- <flux:navlist.group :heading="__('Platform')" class="grid"> --}}
-                    <flux:navlist.item :href="route('admin.all-offers')" :current="request()->routeIs('admin.all-offers')" wire:navigate>{{ __('Alle tilbud') }}</flux:navlist.item>
+<body class="min-h-screen bg-white">
+    <flux:sidebar sticky stashable class="bg-white">
+        <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
-                    <flux:navlist.item :href="route('admin.users')" :current="request()->routeIs('admin.users')" wire:navigate>{{ __('Brugere') }}</flux:navlist.item>
+        <a href="{{ route('admin.all-offers') }}" class="mr-5 flex items-center space-x-2 py-3" wire:navigate>
+            <div class="grid flex-1 text-left text-3xl border-b border-white pb-4">
+                <svg class="h-6 md:h-10" viewBox="0 0 181 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M147.352 43.4802C145.176 43.4802 143.416 42.9896 142.072 42.0082C140.739 41.0162 139.928 39.6189 139.64 37.8162L144.088 37.1442C144.269 37.9549 144.669 38.5896 145.288 39.0482C145.917 39.5069 146.712 39.7362 147.672 39.7362C148.461 39.7362 149.069 39.5869 149.496 39.2882C149.923 38.9789 150.136 38.5522 150.136 38.0082C150.136 37.6669 150.051 37.3949 149.88 37.1922C149.709 36.9789 149.325 36.7709 148.728 36.5682C148.141 36.3656 147.224 36.0989 145.976 35.7682C144.568 35.4056 143.443 35.0002 142.6 34.5522C141.757 34.1042 141.149 33.5709 140.776 32.9522C140.403 32.3229 140.216 31.5656 140.216 30.6802C140.216 29.5709 140.499 28.6109 141.064 27.8002C141.629 26.9789 142.424 26.3496 143.448 25.9122C144.483 25.4642 145.699 25.2402 147.096 25.2402C148.451 25.2402 149.651 25.4482 150.696 25.8642C151.741 26.2802 152.584 26.8722 153.224 27.6402C153.875 28.4082 154.275 29.3149 154.424 30.3602L149.976 31.1602C149.901 30.5202 149.624 30.0136 149.144 29.6402C148.664 29.2669 148.013 29.0482 147.192 28.9842C146.392 28.9309 145.747 29.0376 145.256 29.3042C144.776 29.5709 144.536 29.9549 144.536 30.4562C144.536 30.7549 144.637 31.0056 144.84 31.2082C145.053 31.4109 145.485 31.6189 146.136 31.8322C146.797 32.0456 147.8 32.3229 149.144 32.6642C150.456 33.0056 151.507 33.4056 152.296 33.8642C153.096 34.3122 153.677 34.8562 154.04 35.4962C154.403 36.1256 154.584 36.8882 154.584 37.7842C154.584 39.5549 153.944 40.9469 152.664 41.9602C151.384 42.9736 149.613 43.4802 147.352 43.4802Z"
+                        fill="#092729" />
+                    <path
+                        d="M127.648 43.5117C126.294 43.5117 125.19 43.2824 124.336 42.8237C123.483 42.3651 122.816 41.7837 122.336 41.0797C121.867 40.3757 121.531 39.6451 121.328 38.8877C121.126 38.1197 121.003 37.4211 120.96 36.7917C120.918 36.1624 120.896 35.7037 120.896 35.4157V25.7197H125.312V33.8797C125.312 34.2744 125.334 34.7811 125.376 35.3997C125.419 36.0077 125.552 36.6211 125.776 37.2397C126 37.8584 126.363 38.3757 126.864 38.7917C127.376 39.2077 128.096 39.4157 129.024 39.4157C129.398 39.4157 129.798 39.3571 130.224 39.2397C130.651 39.1224 131.051 38.8984 131.424 38.5677C131.798 38.2264 132.102 37.7304 132.336 37.0797C132.582 36.4184 132.704 35.5544 132.704 34.4877L135.2 35.6717C135.2 37.0371 134.923 38.3171 134.368 39.5117C133.814 40.7064 132.976 41.6717 131.856 42.4077C130.747 43.1437 129.344 43.5117 127.648 43.5117ZM133.248 42.9997V37.2717H132.704V25.7197H137.088V42.9997H133.248Z"
+                        fill="#092729" />
+                    <path d="M113.027 43.0005V19.4805H117.379V43.0005H113.027Z" fill="#092729" />
+                    <path
+                        d="M92.855 43V19.96H102.583C102.807 19.96 103.106 19.9706 103.479 19.992C103.863 20.0026 104.204 20.0346 104.503 20.088C105.879 20.3013 107.004 20.7546 107.879 21.448C108.764 22.1413 109.415 23.016 109.831 24.072C110.247 25.1173 110.455 26.2853 110.455 27.576C110.455 28.8666 110.242 30.04 109.815 31.096C109.399 32.1413 108.748 33.0106 107.863 33.704C106.988 34.3973 105.868 34.8506 104.503 35.064C104.204 35.1066 103.863 35.1386 103.479 35.16C103.095 35.1813 102.796 35.192 102.583 35.192H97.207V43H92.855ZM97.207 31.128H102.391C102.615 31.128 102.86 31.1173 103.127 31.096C103.394 31.0746 103.639 31.032 103.863 30.968C104.45 30.808 104.903 30.5413 105.223 30.168C105.543 29.784 105.762 29.3626 105.879 28.904C106.007 28.4346 106.071 27.992 106.071 27.576C106.071 27.16 106.007 26.7226 105.879 26.264C105.762 25.7946 105.543 25.3733 105.223 25C104.903 24.616 104.45 24.344 103.863 24.184C103.639 24.12 103.394 24.0773 103.127 24.056C102.86 24.0346 102.615 24.024 102.391 24.024H97.207V31.128Z"
+                        fill="#092729" />
+                    <path d="M84.666 43.0005V19.4805H89.018V43.0005H84.666Z" fill="#092729" />
+                    <path
+                        d="M73.8694 43.4802C72.0988 43.4802 70.5361 43.1016 69.1814 42.3442C67.8374 41.5762 66.7814 40.5256 66.0134 39.1922C65.2561 37.8482 64.8774 36.3122 64.8774 34.5842C64.8774 32.6962 65.2508 31.0536 65.9974 29.6562C66.7441 28.2589 67.7734 27.1762 69.0854 26.4082C70.3974 25.6296 71.9068 25.2402 73.6134 25.2402C75.4268 25.2402 76.9681 25.6669 78.2374 26.5202C79.5068 27.3736 80.4454 28.5736 81.0534 30.1202C81.6614 31.6669 81.8748 33.4856 81.6934 35.5762H77.3894V33.9762C77.3894 32.2162 77.1068 30.9522 76.5414 30.1842C75.9868 29.4056 75.0748 29.0162 73.8054 29.0162C72.3228 29.0162 71.2294 29.4696 70.5254 30.3762C69.8321 31.2722 69.4854 32.6002 69.4854 34.3602C69.4854 35.9709 69.8321 37.2189 70.5254 38.1042C71.2294 38.9789 72.2588 39.4162 73.6134 39.4162C74.4668 39.4162 75.1974 39.2296 75.8054 38.8562C76.4134 38.4829 76.8774 37.9442 77.1974 37.2402L81.5494 38.4882C80.8988 40.0669 79.8694 41.2936 78.4614 42.1682C77.0641 43.0429 75.5334 43.4802 73.8694 43.4802ZM68.1414 35.5762V32.3442H79.5974V35.5762H68.1414Z"
+                        fill="#092729" />
+                    <path
+                        d="M53.8054 43.48C52.2161 43.48 50.8241 43.08 49.6294 42.28C48.4347 41.48 47.5014 40.392 46.8294 39.016C46.1681 37.64 45.8374 36.088 45.8374 34.36C45.8374 32.6 46.1734 31.0373 46.8454 29.672C47.5281 28.296 48.4827 27.2133 49.7094 26.424C50.9361 25.6346 52.3761 25.24 54.0294 25.24C55.6721 25.24 57.0534 25.64 58.1734 26.44C59.2934 27.24 60.1414 28.328 60.7174 29.704C61.2934 31.08 61.5814 32.632 61.5814 34.36C61.5814 36.088 61.2881 37.64 60.7014 39.016C60.1254 40.392 59.2614 41.48 58.1094 42.28C56.9574 43.08 55.5227 43.48 53.8054 43.48ZM54.5094 39.608C55.4801 39.608 56.2534 39.3893 56.8294 38.952C57.4161 38.5146 57.8374 37.9013 58.0934 37.112C58.3494 36.3226 58.4774 35.4053 58.4774 34.36C58.4774 33.3146 58.3494 32.3973 58.0934 31.608C57.8374 30.8186 57.4267 30.2053 56.8614 29.768C56.3067 29.3306 55.5761 29.112 54.6694 29.112C53.6987 29.112 52.8987 29.352 52.2694 29.832C51.6507 30.3013 51.1921 30.936 50.8934 31.736C50.5947 32.5253 50.4454 33.4 50.4454 34.36C50.4454 35.3306 50.5894 36.216 50.8774 37.016C51.1654 37.8053 51.6081 38.4346 52.2054 38.904C52.8027 39.3733 53.5707 39.608 54.5094 39.608ZM58.4774 43V31.16H57.9334V19.96H62.3174V43H58.4774Z"
+                        fill="#092729" />
+                    <path
+                        d="M34.8823 42.9997V25.7197H38.7223V29.9437L38.3063 29.3997C38.5303 28.8024 38.829 28.2584 39.2023 27.7677C39.5757 27.277 40.0343 26.8717 40.5783 26.5517C40.9943 26.2957 41.4477 26.0984 41.9383 25.9597C42.429 25.8104 42.9357 25.7197 43.4583 25.6877C43.981 25.645 44.5037 25.6557 45.0263 25.7197V29.7837C44.5463 29.6344 43.9863 29.5864 43.3463 29.6397C42.717 29.6824 42.1463 29.8264 41.6343 30.0717C41.1223 30.3064 40.6903 30.621 40.3383 31.0157C39.9863 31.3997 39.7197 31.8584 39.5383 32.3917C39.357 32.9144 39.2663 33.5064 39.2663 34.1677V42.9997H34.8823Z"
+                        fill="#092729" />
+                    <path
+                        d="M23.5558 43.4802C21.8172 43.4802 20.2918 43.0909 18.9798 42.3122C17.6678 41.5336 16.6438 40.4616 15.9078 39.0962C15.1825 37.7202 14.8198 36.1416 14.8198 34.3602C14.8198 32.5576 15.1932 30.9736 15.9398 29.6082C16.6865 28.2322 17.7158 27.1602 19.0278 26.3922C20.3398 25.6242 21.8492 25.2402 23.5558 25.2402C25.2945 25.2402 26.8198 25.6296 28.1318 26.4082C29.4545 27.1869 30.4838 28.2642 31.2198 29.6402C31.9558 31.0056 32.3238 32.5789 32.3238 34.3602C32.3238 36.1522 31.9505 37.7362 31.2038 39.1122C30.4678 40.4776 29.4385 41.5496 28.1158 42.3282C26.8038 43.0962 25.2838 43.4802 23.5558 43.4802ZM23.5558 39.4162C24.9532 39.4162 25.9932 38.9469 26.6758 38.0082C27.3692 37.0589 27.7158 35.8429 27.7158 34.3602C27.7158 32.8242 27.3638 31.5976 26.6598 30.6802C25.9665 29.7629 24.9318 29.3042 23.5558 29.3042C22.6065 29.3042 21.8278 29.5176 21.2198 29.9442C20.6118 30.3709 20.1585 30.9629 19.8598 31.7202C19.5718 32.4776 19.4278 33.3576 19.4278 34.3602C19.4278 35.9069 19.7745 37.1389 20.4678 38.0562C21.1718 38.9629 22.2012 39.4162 23.5558 39.4162Z"
+                        fill="#092729" />
+                    <path d="M0.240234 43V19.96H14.3202V24.312H4.59223V29.304H12.4002V33.656H4.59223V43H0.240234Z"
+                        fill="#092729" />
+                    <path
+                        d="M159.62 10.4814L159.597 10.7459C159.488 12.3501 160.172 13.6496 161.655 14.3108C162 14.4661 162.938 14.4603 162.846 14.8916C159.327 18.9222 154.462 21.4003 149 21.0726V10.4814H159.626H159.62Z"
+                        fill="#0D826E" />
+                    <path d="M170.102 0H159.62V10.4819H170.102V0Z" fill="#0D826E" />
+                    <path d="M180.584 10.4814H170.103V20.9634H180.584V10.4814Z" fill="#0D826E" />
+                    <path
+                        d="M170.102 20.9634L169.837 20.9864C168.233 21.0957 166.933 20.4114 166.272 18.928C166.117 18.583 166.123 17.6458 165.691 17.7378C161.661 21.2567 159.183 26.121 159.51 31.5833H170.102V20.9577V20.9634Z"
+                        fill="#0D826E" />
+                </svg>
+            </div>
+        </a>
 
-                    <flux:navlist.item :href="route('admin.business-info')" :current="request()->routeIs('admin.business-info')" wire:navigate>{{ __('Virksomhedsinfo') }}</flux:navlist.item>
+        <flux:navlist variant="outline">
+            <flux:navlist.item :href="route('admin.all-offers')" :class="'!text-primary-200 hover:!text-secondary'"
+                :current="request()->routeIs('admin.all-offers')" wire:navigate>{{ __('Alle tilbud') }}
+            </flux:navlist.item>
 
-                    <flux:navlist.item :href="route('admin.online-profil')" :current="request()->routeIs('admin.online-profil')" wire:navigate>{{ __('Online Profil') }}</flux:navlist.item>
-                {{-- </flux:navlist.group> --}}
-            </flux:navlist>
+            <flux:navlist.item :href="route('admin.users')" :class="'!text-primary-200 hover:!text-secondary'"
+                :current="request()->routeIs('admin.users')" wire:navigate>{{ __('Brugere') }}</flux:navlist.item>
 
-            <flux:spacer />
+            <flux:navlist.item :href="route('admin.business-info')"
+                :class="'!text-primary-200 hover:!text-secondary'"
+                :current="request()->routeIs('admin.business-info')" wire:navigate>{{ __('Virksomhedsinfo') }}
+            </flux:navlist.item>
 
-            {{-- <flux:navlist variant="outline">
-                <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
-                {{ __('Repository') }}
-                </flux:navlist.item>
+            <flux:navlist.item :href="route('admin.online-profil')"
+                :class="'!text-primary-200 hover:!text-secondary'"
+                :current="request()->routeIs('admin.online-profil')" wire:navigate>{{ __('Online Profil') }}
+            </flux:navlist.item>
+        </flux:navlist>
 
-                <flux:navlist.item icon="book-open-text" href="https://laravel.com/docs/starter-kits" target="_blank">
-                {{ __('Documentation') }}
-                </flux:navlist.item>
-            </flux:navlist> --}}
+        <flux:spacer />
 
-            <!-- Desktop User Menu -->
-            
-            @livewire('sidebar-selector')
+        @livewire('sidebar-selector')
 
-        </flux:sidebar>
+    </flux:sidebar>
 
-        <!-- Mobile User Menu -->
-        <flux:header class="lg:hidden">
-            <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
+    <!-- Mobile User Menu -->
+    <flux:header class="lg:hidden">
+        <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 
-            <flux:spacer />
+        <flux:spacer />
 
-            <flux:dropdown position="top" align="end">
-                <flux:profile
-                    :initials="auth()->user()->initials()"
-                    icon-trailing="chevron-down"
-                />
+        <flux:dropdown position="top" align="end">
+            <flux:profile :initials="auth()->user()->initials()" icon-trailing="chevron-down" />
 
-                <flux:menu>
-                    <flux:menu.radio.group>
-                        <div class="p-0 text-sm font-normal">
-                            <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                                <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg">
-                                    <span
-                                        class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white"
-                                    >
-                                        {{ auth()->user()->initials() }}
-                                    </span>
+            <flux:menu>
+                <flux:menu.radio.group class="h-54">
+                    <div class="p-0 text-sm font-normal">
+                        <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                            <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg">
+                                <span
+                                    class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black">
+                                    {{ auth()->user()->initials() }}
                                 </span>
+                            </span>
 
-                                <div class="grid flex-1 text-left text-sm leading-tight">
-                                    <span class="truncate font-semibold">{{ auth()->user()->name }}</span>
-                                    <span class="truncate text-xs">{{ auth()->user()->email }}</span>
-                                </div>
+                            <div class="grid flex-1 text-left text-sm leading-tight">
+                                <span class="truncate font-semibold">{{ auth()->user()->name }}</span>
+                                <span class="truncate text-xs">{{ auth()->user()->email }}</span>
                             </div>
                         </div>
-                    </flux:menu.radio.group>
+                    </div>
+                </flux:menu.radio.group>
 
-                    <flux:menu.separator />
+                <flux:menu.separator />
 
-                    <flux:menu.radio.group>
-                        <flux:menu.item href="/settings/profile" icon="cog" wire:navigate>{{ __('Settings') }}</flux:menu.item>
-                    </flux:menu.radio.group>
+                <flux:menu.radio.group>
+                    <flux:menu.item href="/settings/profile" icon="cog" wire:navigate>{{ __('Settings') }}
+                    </flux:menu.item>
+                </flux:menu.radio.group>
 
-                    <flux:menu.separator />
+                <flux:menu.separator />
 
-                    <form method="POST" action="{{ route('logout') }}" class="w-full">
-                        @csrf
-                        <flux:menu.item as="button" type="submit" icon="arrow-right-start-on-rectangle" class="w-full">
-                            {{ __('Log ud') }}
-                        </flux:menu.item>
-                    </form>
-                </flux:menu>
-            </flux:dropdown>
-        </flux:header>
+                <form method="POST" action="{{ route('logout') }}" class="w-full">
+                    @csrf
+                    <flux:menu.item as="button" type="submit" icon="arrow-right-start-on-rectangle" class="w-full">
+                        {{ __('Log ud') }}
+                    </flux:menu.item>
+                </form>
+            </flux:menu>
+        </flux:dropdown>
+    </flux:header>
 
-        {{ $slot }}
+    {{ $slot }}
 
-        @fluxScripts
-    </body>
+    @fluxScripts
+</body>
+
 </html>

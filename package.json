@@ -9,6 +9,7 @@
         "autoprefixer": "^10.4.20",
         "axios": "^1.7.4",
         "concurrently": "^9.0.1",
+        "el-transition": "^0.0.7",
         "laravel-vite-plugin": "^1.0",
         "pell": "^1.0.6",
         "quill": "^2.0.3",

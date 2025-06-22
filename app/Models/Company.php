@@ -19,6 +19,12 @@ class Company extends Model
         'billing_email',
         'phone_number',
         'website',
+        'white_label_enabled',
+        'theme',
+    ];
+
+    protected $casts = [
+        'white_label_enabled' => 'boolean',
     ];
 
     public function users()
@@ -46,6 +52,18 @@ class Company extends Model
     public function userInviteToken()
     {
         return $this->hasOne(UserInvitation::class)->where('type', 'company');
+    }
+
+    public function blacklistedCompanies()
+    {
+        return $this->belongsToMany(Company::class, 'company_blacklist', 'company_id', 'blacklisted_company_id')
+            ->withTimestamps();
+    }
+
+    public function blacklistedByCompanies()
+    {
+        return $this->belongsToMany(Company::class, 'company_blacklist', 'blacklisted_company_id', 'company_id')
+            ->withTimestamps();
     }
 
     protected static function booted()

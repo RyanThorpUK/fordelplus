@@ -30,6 +30,6 @@ class OfferCategory extends Model
 
     public function offers()
     {
-        return $this->hasMany(Offer::class);
+        return $this->hasMany(Offer::class, 'category_id');
     }
 } 
